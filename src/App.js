@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
 
+import './App.css';
+import API from './adapters/API'
+import ShowContainer from './containers/ShowContainer'
 function App() {
+
+const makeQuery = () => { 
+  API.fetchSongQuery()
+  .then(songs => setSongs(songs))
+}
+
+const [songs, setSongs] = useState([])
+
+
+
+useEffect(
+
+makeQuery,
+
+[]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ShowContainer songs = {songs}/>
     </div>
   );
 }
