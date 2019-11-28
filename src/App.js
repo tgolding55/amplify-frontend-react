@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import SpotifyLogin from "react-spotify-login";
 import { clientId, redirectUri } from "./settings";
 import "./App.css";
@@ -11,6 +11,7 @@ function App() {
   };
 
   const [songs, setSongs] = useState([]);
+  const [spotifySignIn, setSpotifySignIn] = useState(false);
 
   const onFailure = () => {
     console.log("FAILURE");
@@ -18,23 +19,26 @@ function App() {
 
   const onSuccess = () => {
     console.log("SUCCESS");
+    setSpotifySignIn(true);
   };
 
-  useEffect(
-    makeQuery,
-
-    []
-  );
+  useEffect(makeQuery, []);
 
   return (
     <div className="App">
-      <SpotifyLogin
-        clientId={clientId}
-        redirectUri={redirectUri}
-        onSuccess={onSuccess}
-        onFailure={onFailure}
-      />
-      <ShowContainer songs={songs} />
+      {!spotifySignIn ? (
+        <Fragment>
+          <SpotifyLogin
+            clientId={clientId}
+            redirectUri={redirectUri}
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+          />
+          <ShowContainer songs={songs} />
+        </Fragment>
+      ) : (
+        <ShowContainer songs={songs} />
+      )}
     </div>
   );
 }
