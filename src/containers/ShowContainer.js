@@ -2,13 +2,12 @@ import React from "react";
 import SongCard from "../components/SongCard";
 import SearchBar from "../components/SearchBar";
 
-const ShowContainer = ({ songs, makeQuery }) => {
-  console.log(songs);
+const ShowContainer = ({ songs, makeQuery, addSongToQueue }) => {
   return (
     <div>
       <SearchBar handleSubmit={makeQuery} />
       {songs.map(song => (
-        <SongCard {...song} />
+        <SongCard key={song.id} {...song} handleClick={addSongToQueue} />
       ))}
     </div>
   );
