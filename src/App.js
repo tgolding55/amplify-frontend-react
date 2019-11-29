@@ -16,7 +16,6 @@ function App() {
   };
 
   const [songs, setSongs] = useState([]);
-  const [songQueue, setSongQueue] = useState([]);
   const [currentSongId, setCurrentSongId] = useState("");
 
   const onFailure = () => {
@@ -27,15 +26,9 @@ function App() {
     console.log("SUCCESS");
   };
 
-  const addSongToQueue = songId => {
-    setSongQueue([...songQueue, songId]);
+  const setCurrentSong = songId => {
+    setCurrentSongId(songId);
   };
-
-  const updateCurrentSong = () => {
-    setCurrentSongId(songQueue[0]);
-  };
-
-  useEffect(updateCurrentSong, [songQueue]);
 
   useEffect(initialSetup, []);
 
@@ -51,7 +44,7 @@ function App() {
       <ShowContainer
         songs={songs}
         makeQuery={makeQuery}
-        addSongToQueue={addSongToQueue}
+        setCurrentSong={setCurrentSong}
       />
     </div>
   );
