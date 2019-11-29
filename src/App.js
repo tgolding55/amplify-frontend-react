@@ -9,6 +9,7 @@ import Player from "./components/Player";
 function App() {
   const initialSetup = () => {
     makeQuery();
+    
   };
 
   const makeQuery = (query = "pompeii") => {
@@ -53,7 +54,11 @@ function App() {
         makeQuery={makeQuery}
         addSongToQueue={addSongToQueue}
       />
+
+
     </div>
+
+
   );
 }
 
