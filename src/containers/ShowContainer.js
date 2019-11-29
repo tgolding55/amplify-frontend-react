@@ -3,7 +3,7 @@ import SongCard from "../components/SongCard";
 import SearchBar from "../components/SearchBar";
 import { Card, Grid } from "semantic-ui-react";
 
-const ShowContainer = ({ songs, makeQuery, setCurrentSong }) => {
+const ShowContainer = ({ songs, makeQuery, setCurrentSong, addSongToPlaylist }) => {
   return (
     <div>
       <Grid>

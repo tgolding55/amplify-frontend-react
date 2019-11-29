@@ -4,6 +4,7 @@ import { clientId, redirectUri } from "./settings";
 import "./App.css";
 import API from "./adapters/API";
 import ShowContainer from "./containers/ShowContainer";
+import PlaylistContainer from './containers/PlaylistContainer';
 import Player from "./components/Player";
 import { Grid } from "semantic-ui-react";
 
@@ -18,6 +19,15 @@ function App() {
 
   const [songs, setSongs] = useState([]);
   const [currentSongId, setCurrentSongId] = useState("");
+  const [currentPlaylist, setCurrentPlaylist] = useState({name: "", songs: []});
+
+  
+  const addSongToPlaylist = (songId) => {
+    setCurrentPlaylist({name:currentPlaylist.name, songs: [...currentPlaylist.songs, songId]})
+  }
+
+
+
 
   const onFailure = () => {
     console.log("FAILURE");
@@ -35,6 +45,7 @@ function App() {
 
   return (
     <div className="App">
+
       <Grid stackable column={3}>
         <Grid.Row>
           <Grid.Column>
@@ -59,8 +70,15 @@ function App() {
               songs={songs}
               makeQuery={makeQuery}
               setCurrentSong={setCurrentSong}
+    addSongToPlaylist = {addSongToPlaylist}
             />
           </Grid.Column>
+    <Grid.Column verticalAlign="right>
+    <PlaylistContainer 
+       currentPlaylist= {currentPlaylist}
+       
+       />
+    <Grid.Column />
         </Grid.Row>
       </Grid>
     </div>
