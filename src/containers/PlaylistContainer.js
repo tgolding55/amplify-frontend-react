@@ -1,12 +1,11 @@
-
 import React from "react";
 import SongCard from "../components/SongCard";
 
-const PlaylistContainer = ({ currentPlaylist}) => {
+const PlaylistContainer = ({ currentPlaylist }) => {
   return (
     <div>
       {currentPlaylist.songs.map(song => (
-        <SongCard key={song.id} id= {song}/>
+        <SongCard key={song.id} id={song} />
       ))}
     </div>
   );
