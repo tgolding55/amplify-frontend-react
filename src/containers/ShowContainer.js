@@ -18,7 +18,14 @@ const ShowContainer = ({
         <Grid.Row>
           <Card.Group centered="true" doubling>
             {songs.map(song => (
-              <SongCard key={song.id} {...song} handleClick={setCurrentSong} />
+              <>
+                <SongCard
+                  key={song.id}
+                  {...song}
+                  handleClick={setCurrentSong}
+                />
+                <button onClick={() => addSongToPlaylist(song)}></button>
+              </>
             ))}
           </Card.Group>
         </Grid.Row>

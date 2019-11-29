@@ -24,10 +24,10 @@ function App() {
     songs: []
   });
 
-  const addSongToPlaylist = songId => {
+  const addSongToPlaylist = song => {
     setCurrentPlaylist({
       name: currentPlaylist.name,
-      songs: [...currentPlaylist.songs, songId]
+      songs: [...currentPlaylist.songs, song]
     });
   };
 
@@ -66,13 +66,17 @@ function App() {
         </Grid.Row>
 
         <Grid.Row>
-          <Grid.Column verticalAlign="middle">
+          <Grid.Column floated="left" width={3}></Grid.Column>
+          <Grid.Column verticalAlign="middle" width={10}>
             <ShowContainer
               songs={songs}
               makeQuery={makeQuery}
               setCurrentSong={setCurrentSong}
               addSongToPlaylist={addSongToPlaylist}
             />
+          </Grid.Column>
+          <Grid.Column floated="right" width={3}>
+            <PlaylistContainer currentPlaylist={currentPlaylist} setCurrentSong={setCurrentSong} />
           </Grid.Column>
         </Grid.Row>
       </Grid>

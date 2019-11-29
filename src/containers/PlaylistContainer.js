@@ -1,12 +1,15 @@
 import React from "react";
 import SongCard from "../components/SongCard";
+import { Card } from "semantic-ui-react";
 
-const PlaylistContainer = ({ currentPlaylist }) => {
+const PlaylistContainer = ({ currentPlaylist, setCurrentSong }) => {
   return (
     <div>
-      {currentPlaylist.songs.map(song => (
-        <SongCard key={song.id} id={song} />
-      ))}
+      <Card.Group centered="true" doubling>
+        {currentPlaylist.songs.map(song => (
+          <SongCard key={song.id} {...song} handleClick={setCurrentSong} />
+        ))}
+      </Card.Group>
     </div>
   );
 };
