@@ -31,6 +31,13 @@ function App() {
     });
   };
 
+  const removeSongFromPlaylist = songToRemove => { 
+    setCurrentPlaylist({
+      name:currentPlaylist.name,
+      songs: currentPlaylist.songs.filter(song => song !== songToRemove)
+    })
+  }
+
   const onFailure = () => {
     console.log("FAILURE");
   };
@@ -76,7 +83,8 @@ function App() {
             />
           </Grid.Column>
           <Grid.Column floated="right" width={3}>
-            <PlaylistContainer currentPlaylist={currentPlaylist} setCurrentSong={setCurrentSong} />
+            <PlaylistContainer currentPlaylist={currentPlaylist} setCurrentSong={setCurrentSong} 
+            removeSongFromPlaylist = {removeSongFromPlaylist}/>
           </Grid.Column>
         </Grid.Row>
       </Grid>

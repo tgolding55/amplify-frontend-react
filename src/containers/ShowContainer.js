@@ -32,7 +32,6 @@ const ShowContainer = ({
                 < Button positive
                   key={index}
                   onClick={() => addSongToPlaylist(song)}
-                  
                 >Add</Button>
               </div>
             ))}

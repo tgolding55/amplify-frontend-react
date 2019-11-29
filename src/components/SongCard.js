@@ -1,5 +1,5 @@
 import React from "react";
-import { Card  } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 
 const SongCard = ({ id, name, image, band, duration, handleClick}) => {
   return (
