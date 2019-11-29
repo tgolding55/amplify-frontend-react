@@ -1,7 +1,7 @@
 import React from "react";
 import SongCard from "../components/SongCard";
 import SearchBar from "../components/SearchBar";
-import { Card, Grid } from "semantic-ui-react";
+import { Card, Grid, Button } from "semantic-ui-react";
 
 const ShowContainer = ({
   songs,
@@ -29,10 +29,11 @@ const ShowContainer = ({
                   {...song}
                   handleClick={setCurrentSong}
                 />
-                <button
+                < Button positive
                   key={index}
                   onClick={() => addSongToPlaylist(song)}
-                ></button>
+                  
+                >Add</Button>
               </div>
             ))}
           </Card.Group>
