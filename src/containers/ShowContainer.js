@@ -16,7 +16,12 @@ const ShowContainer = ({
           <SearchBar key="searchBar" handleSubmit={makeQuery} />
         </Grid.Row>
         <Grid.Row>
-          <Card.Group centered={true} doubling={true}>
+          <Card.Group
+            centered={true}
+            doubling={true}
+            textAlign="center"
+            stackable={true}
+          >
             {songs.map((song, index) => (
               <div key={index + "div"}>
                 <SongCard

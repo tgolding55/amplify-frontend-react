@@ -9,6 +9,7 @@ const SongCard = ({ id, name, image, band, duration, handleClick }) => {
       description={band}
       extra={`${Math.floor(duration / 1000)} seconds`}
       onClick={e => handleClick(id)}
+      border={1}
     />
   );
 };
