@@ -10,14 +10,19 @@ const SearchBar = ({ handleSubmit }) => {
         setInputField("");
       }}
     >
-      <input
-        type="text"
-        name="name"
-        value={inputField}
-        onChange={e => setInputField(e.target.value)}
-        placeholder="Search Spotify"
-      />
-      <input type="submit" value="Submit" />
+      <div className="ui search">
+        <div className="ui icon input">
+          <input
+            className="prompt"
+            type="text"
+            name="name"
+            value={inputField}
+            onChange={e => setInputField(e.target.value)}
+            placeholder="Search Spotify"
+          />
+          <i className="search icon" />
+        </div>
+      </div>
     </form>
   );
 };

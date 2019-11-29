@@ -12,20 +12,23 @@ const ShowContainer = ({
   return (
     <div>
       <Grid>
-        <Grid.Row centered>
-          <SearchBar handleSubmit={makeQuery} />
+        <Grid.Row centered={true}>
+          <SearchBar key="searchBar" handleSubmit={makeQuery} />
         </Grid.Row>
         <Grid.Row>
-          <Card.Group centered="true" doubling>
-            {songs.map(song => (
-              <>
+          <Card.Group centered={true} doubling={true}>
+            {songs.map((song, index) => (
+              <div key={index + "div"}>
                 <SongCard
-                  key={song.id}
+                  key={index + song.id}
                   {...song}
                   handleClick={setCurrentSong}
                 />
-                <button onClick={() => addSongToPlaylist(song)}></button>
-              </>
+                <button
+                  key={index}
+                  onClick={() => addSongToPlaylist(song)}
+                ></button>
+              </div>
             ))}
           </Card.Group>
         </Grid.Row>
