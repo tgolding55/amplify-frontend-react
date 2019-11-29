@@ -1,14 +1,16 @@
 import React from "react";
 import { Card } from "semantic-ui-react";
 
-const SongCard = ({ id, handleClick }) => {
-  return <Card header={id} onClick={e => handleClick(id)} />;
+const SongCard = ({ id, name, image, band, duration, handleClick }) => {
+  return (
+    <Card
+      header={name}
+      image={image}
+      description={band}
+      extra={`${Math.floor(duration / 1000)} seconds`}
+      onClick={e => handleClick(id)}
+    />
+  );
 };
 
 export default SongCard;
-
-/*
-    <div  width="300" height="380">
-      {id}
-    </div>
-*/
