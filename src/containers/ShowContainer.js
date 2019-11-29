@@ -1,16 +1,23 @@
 import React from "react";
 import SongCard from "../components/SongCard";
 import SearchBar from "../components/SearchBar";
+import { Card, Grid } from "semantic-ui-react";
 
 const ShowContainer = ({ songs, makeQuery, setCurrentSong, addSongToPlaylist }) => {
   return (
     <div>
-      <SearchBar handleSubmit={makeQuery} />
-      {songs.map(song => (
-        <SongCard key={song.id} {...song} handleClick={setCurrentSong} />
-        
-      ))}
-      
+      <Grid>
+        <Grid.Row centered>
+          <SearchBar handleSubmit={makeQuery} />
+        </Grid.Row>
+        <Grid.Row>
+          <Card.Group centered="true" doubling>
+            {songs.map(song => (
+              <SongCard key={song.id} {...song} handleClick={setCurrentSong} />
+            ))}
+          </Card.Group>
+        </Grid.Row>
+      </Grid>
     </div>
   );
 };
