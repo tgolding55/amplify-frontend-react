@@ -5,7 +5,6 @@ import SearchBar from "../components/SearchBar";
 const ShowContainer = ({ songs, makeQuery, setCurrentSong }) => {
   return (
     <div>
-
       <SearchBar handleSubmit={makeQuery} />
       {songs.map(song => (
         <SongCard key={song.id} {...song} handleClick={setCurrentSong} />

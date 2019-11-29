@@ -9,7 +9,6 @@ import Player from "./components/Player";
 function App() {
   const initialSetup = () => {
     makeQuery();
-    
   };
 
   const makeQuery = (query = "pompeii") => {
@@ -18,7 +17,6 @@ function App() {
 
   const [songs, setSongs] = useState([]);
   const [currentSongId, setCurrentSongId] = useState("");
-  
 
   const onFailure = () => {
     console.log("FAILURE");
@@ -48,11 +46,7 @@ function App() {
         makeQuery={makeQuery}
         setCurrentSong={setCurrentSong}
       />
-
-
     </div>
-
-
   );
 }
 
