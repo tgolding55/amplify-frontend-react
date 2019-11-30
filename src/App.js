@@ -1,93 +1,35 @@
-import React, { useEffect, useState } from "react";
-import SpotifyLogin from "react-spotify-login";
-import { clientId, redirectUri } from "./settings";
+import React, { useState, useEffect } from "react";
 import "./App.css";
+import { Route, Redirect } from "react-router-dom";
+import Home from "./pages/Home";
+import Auth from "./pages/Auth";
+import PATHS from "./paths";
 import API from "./adapters/API";
-import ShowContainer from "./containers/ShowContainer";
-import PlaylistContainer from "./containers/PlaylistContainer";
-import Player from "./components/Player";
-import { Grid } from "semantic-ui-react";
 
-function App() {
-  const initialSetup = () => {
-    makeQuery();
-  };
+function App({ history }) {
+  const [user, setUser] = useState(null);
 
-  const makeQuery = (query = "pompeii") => {
-    API.fetchSongQuery(query).then(songs => setSongs(songs));
-  };
-
-  const [songs, setSongs] = useState([]);
-  const [currentSongId, setCurrentSongId] = useState("");
-  const [currentPlaylist, setCurrentPlaylist] = useState({
-    name: "",
-    songs: []
-  });
-
-  const addSongToPlaylist = song => {
-    setCurrentPlaylist({
-      name: currentPlaylist.name,
-      songs: [...currentPlaylist.songs, song]
-    });
-  };
-
-  const removeSongFromPlaylist = songToRemove => { 
-    setCurrentPlaylist({
-      name:currentPlaylist.name,
-      songs: currentPlaylist.songs.filter(song => song !== songToRemove)
-    })
-  }
-
-  const onFailure = () => {
-    console.log("FAILURE");
-  };
-
-  const onSuccess = () => {
-    console.log("SUCCESS");
-  };
-
-  const setCurrentSong = songId => {
-    setCurrentSongId(songId);
-  };
-
-  useEffect(initialSetup, []);
+  useEffect(() => {
+    API.validate()
+      .then(user => {
+        setUser(user);
+        history.push(PATHS.HOME);
+      })
+      .catch(() => history.push(PATHS.AUTH));
+  }, []);
 
   return (
     <div className="App">
-      <Grid stackable column={3}>
-        <Grid.Row>
-          <Grid.Column>
-            <Player id={currentSongId} />
-          </Grid.Column>
-        </Grid.Row>
+      <Route
+        path={PATHS.AUTH}
+        component={routerProps => <Auth {...routerProps} setUser={setUser} />}
+      />
 
-        <Grid.Row>
-          <Grid.Column>
-            <SpotifyLogin
-              clientId={clientId}
-              redirectUri={redirectUri}
-              onSuccess={onSuccess}
-              onFailure={onFailure}
-            />
-          </Grid.Column>
-        </Grid.Row>
-
-        <Grid.Row>
-          <Grid.Column floated="left" width={3}></Grid.Column>
-          <Grid.Column verticalAlign="middle" width={10}>
-            <ShowContainer
-              songs={songs}
-              makeQuery={makeQuery}
-              setCurrentSong={setCurrentSong}
-              addSongToPlaylist={addSongToPlaylist}
-            />
-          </Grid.Column>
-          <Grid.Column floated="right" width={3}>
-            <PlaylistContainer currentPlaylist={currentPlaylist} setCurrentSong={setCurrentSong} 
-            removeSongFromPlaylist = {removeSongFromPlaylist}/>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      {user ? (
+        <Route exact path={PATHS.HOME} component={Home} />
+      ) : (
+        <Redirect to={PATHS.AUTH} />
+      )}
     </div>
   );
 }
