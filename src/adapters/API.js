@@ -5,7 +5,6 @@ const LOGIN_URL = API_ENDPOINT + "login";
 const SIGNUP_URL = API_ENDPOINT + "users";
 
 const jsonify = resp => {
-  if (!resp.ok) throw resp;
   return resp.json().then(data => {
     if (data.errors) throw data.errors;
     else return data;
@@ -14,6 +13,21 @@ const jsonify = resp => {
 
 const login = userDetails =>
   fetch(LOGIN_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify({ user: userDetails })
+  })
+    .then(jsonify)
+    .then(data => {
+      localStorage.setItem("token", data.token);
+      return data.user;
+    });
+
+const signup = userDetails =>
+  fetch(SIGNUP_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -60,5 +74,6 @@ const validate = () =>
 export default {
   fetchSongQuery,
   login,
-  validate
+  validate,
+  signup
 };

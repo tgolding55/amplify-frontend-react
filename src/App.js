@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import PATHS from "./paths";
@@ -24,12 +24,7 @@ function App({ history }) {
         path={PATHS.AUTH}
         component={routerProps => <Auth {...routerProps} setUser={setUser} />}
       />
-
-      {user ? (
-        <Route exact path={PATHS.HOME} component={Home} />
-      ) : (
-        <Redirect to={PATHS.AUTH} />
-      )}
+      {user && <Route exact path={PATHS.HOME} component={Home} />}
     </div>
   );
 }

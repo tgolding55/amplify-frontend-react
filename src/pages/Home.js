@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import SpotifyLogin from "react-spotify-login";
-import { clientId, redirectUri } from "../settings";
 import API from "../adapters/API";
 import ShowContainer from "../containers/ShowContainer";
 import PlaylistContainer from "../containers/PlaylistContainer";
@@ -37,14 +35,6 @@ const Home = () => {
     });
   };
 
-  const onFailure = () => {
-    console.log("FAILURE");
-  };
-
-  const onSuccess = successObj => {
-    console.log("SUCCESS: " + successObj["access_token"]);
-  };
-
   const setCurrentSong = songId => {
     setCurrentSongId(songId);
   };
@@ -56,18 +46,6 @@ const Home = () => {
       <Grid.Row>
         <Grid.Column>
           <Player id={currentSongId} />
-        </Grid.Column>
-      </Grid.Row>
-
-      <Grid.Row>
-        <Grid.Column>
-          <SpotifyLogin
-            scope="user-top-read"
-            clientId={clientId}
-            redirectUri={redirectUri}
-            onSuccess={onSuccess}
-            onFailure={onFailure}
-          />
         </Grid.Column>
       </Grid.Row>
 
