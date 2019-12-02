@@ -78,23 +78,26 @@ const Home = ({ accessToken }) => {
             radioField={radioField}
             setRadioField={setRadioField}
           />
+          <br></br>
 
-          {radioField === "Playlists" ? (
-            <ShowContainer
-              items={playlists}
-              Component={PlaylistCard}
-              clickEvents={{ handleClick: setPlayer }}
-            />
-          ) : (
-            <ShowContainer
-              items={songs}
-              clickEvents={{
-                handleClick: setPlayer,
-                handleAddSong: addSongToPlaylist
-              }}
-              Component={SongCard}
-            />
-          )}
+          <Grid.Row>
+            {radioField === "Playlists" ? (
+              <ShowContainer
+                items={playlists}
+                Component={PlaylistCard}
+                clickEvents={{ handleClick: setPlayer }}
+              />
+            ) : (
+              <ShowContainer
+                items={songs}
+                clickEvents={{
+                  handleClick: setPlayer,
+                  handleAddSong: addSongToPlaylist
+                }}
+                Component={SongCard}
+              />
+            )}
+          </Grid.Row>
         </Grid.Column>
         <Grid.Column floated="right" width={3}>
           <CurrentPlaylistContainer
