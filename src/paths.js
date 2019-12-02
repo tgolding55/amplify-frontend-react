@@ -1,4 +1,5 @@
 export default {
   AUTH: "/login",
-  HOME: "/"
+  HOME: "/",
+  AUTHRESPONSE: "/auth"
 };
