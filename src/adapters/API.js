@@ -5,7 +5,7 @@ const SONG_QUERY = SPOTIFY_ENDPOINT + "q";
 const jsonify = resp => resp.json();
 
 const fetchSongQuery = (query, accessToken) =>
-  fetch(SONG_QUERY + "?search=" + query + "?auth=" + accessToken).then(jsonify);
+  fetch(SONG_QUERY + "?search=" + query + "&auth=" + accessToken).then(jsonify);
 
 export default {
   fetchSongQuery
