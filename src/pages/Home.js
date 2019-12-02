@@ -7,13 +7,17 @@ import { Grid } from "semantic-ui-react";
 
 const Home = ({ accessToken }) => {
   const initialSetup = () => {
-    makeQuery();
-    API.getPlaylists(accessToken).then(
-      newPlaylists => setPlaylists(newPlaylists)
-    )
-
-    
+    topSongs();
+    getPlaylists();
   };
+
+  const getPlaylists = () =>
+    API.getPlaylists(accessToken).then(newPlaylists =>
+      setPlaylists(newPlaylists)
+    );
+
+  const topSongs = () =>
+    API.getTopTracks(accessToken).then(songs => setSongs(songs));
 
   const makeQuery = (query = "pompeii") => {
     API.fetchSongQuery(query, accessToken).then(songs => setSongs(songs));
@@ -21,7 +25,7 @@ const Home = ({ accessToken }) => {
 
   const [songs, setSongs] = useState([]);
   const [currentSongId, setCurrentSongId] = useState("");
-  const [playlists, setPlaylists] = useState([])
+  const [playlists, setPlaylists] = useState([]);
   const [currentPlaylist, setCurrentPlaylist] = useState({
     name: "",
     songs: []
