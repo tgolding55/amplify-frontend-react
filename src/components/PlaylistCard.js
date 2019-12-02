@@ -6,7 +6,11 @@ const PlaylistCard = ({ image, name, trackNum, description }) => {
   return (
     <Card
       header={name}
-      image={image.url}
+      image={
+        image.url
+          ? image.url
+          : "https://cdn.ebaumsworld.com/mediaFiles/picture/718392/84717656.jpg"
+      }
       description={description}
       extra={trackNum + " songs"}
       border={1}
