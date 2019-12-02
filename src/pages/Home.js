@@ -8,6 +8,11 @@ import { Grid } from "semantic-ui-react";
 const Home = ({ accessToken }) => {
   const initialSetup = () => {
     makeQuery();
+    API.getPlaylists(accessToken).then(
+      newPlaylists => setPlaylists(newPlaylists)
+    )
+
+    
   };
 
   const makeQuery = (query = "pompeii") => {
@@ -16,6 +21,7 @@ const Home = ({ accessToken }) => {
 
   const [songs, setSongs] = useState([]);
   const [currentSongId, setCurrentSongId] = useState("");
+  const [playlists, setPlaylists] = useState([])
   const [currentPlaylist, setCurrentPlaylist] = useState({
     name: "",
     songs: []
