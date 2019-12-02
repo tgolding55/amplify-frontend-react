@@ -2,7 +2,7 @@ import React from "react";
 
 const Player = ({ uri }) => {
   console.log(uri);
-  const [spotify, type, id] = uri.length ? uri.split(":") : "";
+  const [, type, id] = uri.length ? uri.split(":") : "";
   return (
     <iframe
       title="Player"
