@@ -23,6 +23,7 @@ const Home = ({ accessToken }) => {
     API.getTopTracks(accessToken).then(songs => setSongs(songs));
 
   const makeQuery = (query = "pompeii") => {
+    setRadioField("search");
     API.fetchSongQuery(query, accessToken).then(songs => setSongs(songs));
   };
 
@@ -52,6 +53,11 @@ const Home = ({ accessToken }) => {
   const setPlayer = URI => {
     setPlayingURI(URI);
   };
+  const resetTopTracks = () => {
+    if (radioField === "TopTracks") topSongs();
+  };
+
+  useEffect(resetTopTracks, [radioField]);
 
   useEffect(initialSetup, []);
 
@@ -73,7 +79,13 @@ const Home = ({ accessToken }) => {
             setRadioField={setRadioField}
           />
 
-          {radioField === "TopTracks" ? (
+          {radioField === "Playlists" ? (
+            <ShowContainer
+              items={playlists}
+              Component={PlaylistCard}
+              clickEvents={{ handleClick: setPlayer }}
+            />
+          ) : (
             <ShowContainer
               items={songs}
               clickEvents={{
@@ -81,12 +93,6 @@ const Home = ({ accessToken }) => {
                 handleAddSong: addSongToPlaylist
               }}
               Component={SongCard}
-            />
-          ) : (
-            <ShowContainer
-              items={playlists}
-              Component={PlaylistCard}
-              clickEvents={{ handleClick: setPlayer }}
             />
           )}
         </Grid.Column>

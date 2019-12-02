@@ -32,6 +32,15 @@ const SearchBar = ({ handleSubmit, radioField, setRadioField }) => {
             setRadioField(e.target.innerText);
           }}
         ></Radio>
+        <Radio
+          label="TopTracks"
+          name="radioGroup"
+          value="TopTracks"
+          checked={radioField === "TopTracks"}
+          onChange={e => {
+            setRadioField(e.target.innerText);
+          }}
+        ></Radio>
       </div>
     </form>
   );
