@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import {Radio} from 'semantic-ui-react'
+const SearchBar = ({ handleSubmit, radioField, setRadioField}) => {
+const [inputField, setInputField] = useState("");
 
-const SearchBar = ({ handleSubmit }) => {
-  const [inputField, setInputField] = useState("");
   return (
+    <>
     <form
       onSubmit={e => {
         e.preventDefault();
@@ -24,6 +26,15 @@ const SearchBar = ({ handleSubmit }) => {
         </div>
       </div>
     </form>
+      <Radio 
+      label='Playlists'
+       name ='radioGroup'
+        value='Playlists'
+        checked ={radioField ==='Playlists'}onChange={(e) => {setRadioField(e.target.value)}} >
+
+      </Radio>
+      </>
+
   );
 };
 

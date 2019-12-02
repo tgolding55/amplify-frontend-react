@@ -1,20 +1,17 @@
 import React from "react";
 import SongCard from "../components/SongCard";
-import SearchBar from "../components/SearchBar";
+
 import { Card, Grid, Button } from "semantic-ui-react";
 
 const ShowContainer = ({
   songs,
-  makeQuery,
   setCurrentSong,
   addSongToPlaylist
 }) => {
   return (
     <div>
       <Grid>
-        <Grid.Row centered={true}>
-          <SearchBar key="searchBar" handleSubmit={makeQuery} />
-        </Grid.Row>
+        
         <Grid.Row>
           <Card.Group
             centered={true}
