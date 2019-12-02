@@ -15,7 +15,11 @@ function App() {
         exact
         path={PATHS.HOME}
         component={() =>
-          accessToken ? <Home /> : <Redirect to={PATHS.AUTH} />
+          accessToken ? (
+            <Home accessToken={accessToken} />
+          ) : (
+            <Redirect to={PATHS.AUTH} />
+          )
         }
       />
       <Route

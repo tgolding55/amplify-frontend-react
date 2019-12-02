@@ -5,13 +5,13 @@ import PlaylistContainer from "../containers/PlaylistContainer";
 import Player from "../components/Player";
 import { Grid } from "semantic-ui-react";
 
-const Home = () => {
+const Home = ({ accessToken }) => {
   const initialSetup = () => {
     makeQuery();
   };
 
   const makeQuery = (query = "pompeii") => {
-    API.fetchSongQuery(query).then(songs => setSongs(songs));
+    API.fetchSongQuery(query, accessToken).then(songs => setSongs(songs));
   };
 
   const [songs, setSongs] = useState([]);
