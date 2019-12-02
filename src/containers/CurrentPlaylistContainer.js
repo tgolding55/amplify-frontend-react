@@ -4,7 +4,7 @@ import PlaylistForm from "../components/PlaylistForm";
 
 import { Card, Button } from "semantic-ui-react";
 
-const PlaylistContainer = ({
+const CurrentPlaylistContainer = ({
   currentPlaylist,
   setCurrentSong,
   removeSongFromPlaylist
@@ -35,4 +35,4 @@ const PlaylistContainer = ({
   );
 };
 
-export default PlaylistContainer;
+export default CurrentPlaylistContainer;

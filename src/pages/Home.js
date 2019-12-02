@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import API from "../adapters/API";
 import ShowContainer from "../containers/ShowContainer";
-import PlaylistContainer from "../containers/PlaylistContainer";
+import CurrentPlaylistContainer from "../containers/CurrentPlaylistContainer";
 import Player from "../components/Player";
 import { Grid } from "semantic-ui-react";
 import SearchBar from "../components/SearchBar";
-
+import PlaylistsContainer from "../containers/PlaylistsContainer";
 
 const Home = ({ accessToken }) => {
   const initialSetup = () => {
@@ -32,7 +32,7 @@ const Home = ({ accessToken }) => {
     name: "",
     songs: []
   });
-  const [radioField, setRadioField] = useState('TopTracks')
+  const [radioField, setRadioField] = useState("TopTracks");
 
   const addSongToPlaylist = song => {
     setCurrentPlaylist({
@@ -54,11 +54,6 @@ const Home = ({ accessToken }) => {
 
   useEffect(initialSetup, []);
 
-
-
-
-
-
   return (
     <Grid stackable column={3}>
       <Grid.Row>
@@ -70,16 +65,25 @@ const Home = ({ accessToken }) => {
       <Grid.Row>
         <Grid.Column floated="left" width={3}></Grid.Column>
         <Grid.Column verticalAlign="middle" width={10}>
-        <SearchBar key="searchBar" handleSubmit={makeQuery} radioField={radioField} setRadioField={setRadioField}/>
-        
-          <ShowContainer
-            songs={songs}
-            setCurrentSong={setCurrentSong}
-            addSongToPlaylist={addSongToPlaylist}
+          <SearchBar
+            key="searchBar"
+            handleSubmit={makeQuery}
+            radioField={radioField}
+            setRadioField={setRadioField}
           />
+
+          {radioField === "TopTracks" ? (
+            <ShowContainer
+              songs={songs}
+              setCurrentSong={setCurrentSong}
+              addSongToPlaylist={addSongToPlaylist}
+            />
+          ) : (
+            <PlaylistsContainer playlists={playlists} />
+          )}
         </Grid.Column>
         <Grid.Column floated="right" width={3}>
-          <PlaylistContainer
+          <CurrentPlaylistContainer
             currentPlaylist={currentPlaylist}
             setCurrentSong={setCurrentSong}
             removeSongFromPlaylist={removeSongFromPlaylist}
