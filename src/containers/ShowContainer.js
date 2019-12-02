@@ -1,17 +1,11 @@
 import React from "react";
-import SongCard from "../components/SongCard";
 
-import { Card, Grid, Button } from "semantic-ui-react";
+import { Card, Grid } from "semantic-ui-react";
 
-const ShowContainer = ({
-  songs,
-  setCurrentSong,
-  addSongToPlaylist
-}) => {
+const ShowContainer = ({ items, clickEvents, Component }) => {
   return (
     <div>
       <Grid>
-        
         <Grid.Row>
           <Card.Group
             centered={true}
@@ -19,17 +13,13 @@ const ShowContainer = ({
             textAlign="center"
             stackable={true}
           >
-            {songs.map((song, index) => (
+            {items.map((item, index) => (
               <div key={index + "div"}>
-                <SongCard
-                  key={index + song.id}
-                  {...song}
-                  handleClick={setCurrentSong}
+                <Component
+                  key={index + item.id}
+                  {...item}
+                  clickEvents={clickEvents}
                 />
-                < Button positive
-                  key={index}
-                  onClick={() => addSongToPlaylist(song)}
-                >Add</Button>
               </div>
             ))}
           </Card.Group>

@@ -1,7 +1,14 @@
 import React from "react";
 import { Card } from "semantic-ui-react";
 
-const PlaylistCard = ({ image, name, trackNum, description }) => {
+const PlaylistCard = ({
+  image,
+  uri,
+  name,
+  trackNum,
+  description,
+  clickEvents: { handleClick }
+}) => {
   console.log(image);
   return (
     <Card
@@ -13,6 +20,7 @@ const PlaylistCard = ({ image, name, trackNum, description }) => {
       }
       description={description}
       extra={trackNum + " songs"}
+      onClick={() => handleClick(uri)}
       border={1}
     />
   );

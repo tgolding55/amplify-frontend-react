@@ -1,17 +1,27 @@
 import React from "react";
-import { Card } from "semantic-ui-react";
+import { Card, Button } from "semantic-ui-react";
 
-const SongCard = ({ id, name, image, band, duration, handleClick}) => {
+const SongCard = ({
+  id,
+  uri,
+  name,
+  image,
+  band,
+  duration,
+  clickEvents: { handleAddSong, handleClick }
+}) => {
   return (
-    <Card
-      header={name}
-      image={image}
-      description={band}
-      extra={`${Math.floor(duration / 1000)} seconds`}
-      onClick={e => handleClick(id)}
-      border={1}
-  />
-    
+    <>
+      <Card
+        header={name}
+        image={image}
+        description={band}
+        extra={`${Math.floor(duration / 1000)} seconds`}
+        onClick={() => handleClick(uri)}
+        border={1}
+      />
+      <Button onClick={() => handleAddSong(id)}></Button>
+    </>
   );
 };
 

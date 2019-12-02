@@ -5,7 +5,8 @@ import CurrentPlaylistContainer from "../containers/CurrentPlaylistContainer";
 import Player from "../components/Player";
 import { Grid } from "semantic-ui-react";
 import SearchBar from "../components/SearchBar";
-import PlaylistsContainer from "../containers/PlaylistsContainer";
+import SongCard from "../components/SongCard";
+import PlaylistCard from "../components/PlaylistCard";
 
 const Home = ({ accessToken }) => {
   const initialSetup = () => {
@@ -26,7 +27,7 @@ const Home = ({ accessToken }) => {
   };
 
   const [songs, setSongs] = useState([]);
-  const [currentSongId, setCurrentSongId] = useState("");
+  const [playingURI, setPlayingURI] = useState("");
   const [playlists, setPlaylists] = useState([]);
   const [currentPlaylist, setCurrentPlaylist] = useState({
     name: "",
@@ -48,8 +49,8 @@ const Home = ({ accessToken }) => {
     });
   };
 
-  const setCurrentSong = songId => {
-    setCurrentSongId(songId);
+  const setPlayer = URI => {
+    setPlayingURI(URI);
   };
 
   useEffect(initialSetup, []);
@@ -58,7 +59,7 @@ const Home = ({ accessToken }) => {
     <Grid stackable column={3}>
       <Grid.Row>
         <Grid.Column>
-          <Player id={currentSongId} />
+          <Player uri={playingURI} />
         </Grid.Column>
       </Grid.Row>
 
@@ -74,18 +75,25 @@ const Home = ({ accessToken }) => {
 
           {radioField === "TopTracks" ? (
             <ShowContainer
-              songs={songs}
-              setCurrentSong={setCurrentSong}
-              addSongToPlaylist={addSongToPlaylist}
+              items={songs}
+              clickEvents={{
+                handleClick: setPlayer,
+                handleAddSong: addSongToPlaylist
+              }}
+              Component={SongCard}
             />
           ) : (
-            <PlaylistsContainer playlists={playlists} />
+            <ShowContainer
+              items={playlists}
+              Component={PlaylistCard}
+              clickEvents={{ handleClick: setPlayer }}
+            />
           )}
         </Grid.Column>
         <Grid.Column floated="right" width={3}>
           <CurrentPlaylistContainer
             currentPlaylist={currentPlaylist}
-            setCurrentSong={setCurrentSong}
+            setCurrentSong={setPlayer}
             removeSongFromPlaylist={removeSongFromPlaylist}
           />
         </Grid.Column>
