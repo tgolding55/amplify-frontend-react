@@ -35,7 +35,6 @@ const postPlaylist = (accessToken, name, description, publicBool) => {
 };
 
 const addToPlaylist = (accessToken, playlistId, songURIs) => {
-  console.log(playlistId, songURIs);
   return fetch(
     PLAYLIST_ENDPOINT +
       "/" +
