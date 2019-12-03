@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Checkbox, Form, Button } from "semantic-ui-react";
+import { Checkbox, Form, Button, Card } from "semantic-ui-react";
 
 const PlaylistForm = ({ newPlaylist }) => {
   const [nameField, setNameField] = useState("");
@@ -12,33 +12,48 @@ const PlaylistForm = ({ newPlaylist }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Field>
-        <input
-          type="text"
-          placeholder="Playlist Name"
-          value={nameField}
-          onChange={e => setNameField(e.target.value)}
-        ></input>
-      </Form.Field>
-      <Form.Field>
-        <input
-          type="text"
-          placeholder="Playlist Description"
-          value={descriptionField}
-          onChange={e => setDescriptionField(e.target.value)}
-        ></input>
-      </Form.Field>
-      <Form.Field>
-        <Checkbox
-          label="Public"
-          toggle
-          checked={publicField}
-          onChange={() => setPublicField(!publicField)}
-        ></Checkbox>
-      </Form.Field>
-      <Button type="submit">Create Playlist</Button>
-    </Form>
+    <div className="card">
+      <Card>
+        <Card.Header>New Playlist Form</Card.Header>
+        <Card.Content>
+          <Form onSubmit={handleSubmit}>
+            <Form.Field>
+              <label>
+                Playlist Name
+                <input
+                  type="text"
+                  placeholder="Playlist Name"
+                  value={nameField}
+                  onChange={e => setNameField(e.target.value)}
+                ></input>
+              </label>
+            </Form.Field>
+            <Form.Field>
+              <label>
+                Playlist Description
+                <input
+                  type="text"
+                  placeholder="Playlist Description"
+                  value={descriptionField}
+                  onChange={e => setDescriptionField(e.target.value)}
+                ></input>
+              </label>
+            </Form.Field>
+            <Form.Field>
+              <Checkbox
+                label={publicField ? "Public" : "Private"}
+                toggle
+                checked={publicField}
+                onChange={() => setPublicField(!publicField)}
+              ></Checkbox>
+            </Form.Field>
+            <Button type="submit">Create Playlist</Button>
+          </Form>
+
+          
+        </Card.Content>
+      </Card>
+    </div>
   );
 };
 
