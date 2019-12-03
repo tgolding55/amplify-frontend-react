@@ -17,7 +17,7 @@ const SongCard = ({
         image={image}
         description={band}
         extra={`${Math.floor(duration / 1000)} seconds`}
-        onClick={() => handleClick(uri)}
+        onClick={() => handleClick(uri, band, name)}
         border={1}
       />
       <Button onClick={() => handleAddSong(id)}></Button>
