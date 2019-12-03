@@ -15,8 +15,21 @@ const getPlaylists = accessToken =>
 const getTopTracks = accessToken =>
   fetch(TOPTRACKS_ENDPOINT + "?auth=" + accessToken).then(jsonify);
 
+const postPlaylist = (accessToken, name, description, publicBool) => {
+  const body = { name: name, description: description, public: publicBool };
+  return fetch(PLAYLIST_ENDPOINT + "?auth=" + accessToken, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  }).then(jsonify);
+};
+
 export default {
   fetchSongQuery,
   getPlaylists,
-  getTopTracks
+  getTopTracks,
+  postPlaylist
 };

@@ -16,6 +16,7 @@ const PlaylistForm = ({ newPlaylist }) => {
       <Form.Field>
         <input
           type="text"
+          placeholder="Playlist Name"
           value={nameField}
           onChange={e => setNameField(e.target.value)}
         ></input>
@@ -23,18 +24,20 @@ const PlaylistForm = ({ newPlaylist }) => {
       <Form.Field>
         <input
           type="text"
+          placeholder="Playlist Description"
           value={descriptionField}
           onChange={e => setDescriptionField(e.target.value)}
         ></input>
       </Form.Field>
       <Form.Field>
         <Checkbox
+          label="Public"
           toggle
           checked={publicField}
           onChange={() => setPublicField(!publicField)}
         ></Checkbox>
       </Form.Field>
-      <Button type="submit">Submit</Button>
+      <Button type="submit">Create Playlist</Button>
     </Form>
   );
 };

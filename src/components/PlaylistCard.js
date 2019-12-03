@@ -9,6 +9,7 @@ const PlaylistCard = ({
   description,
   clickEvents: { handleClick }
 }) => {
+  console.log(image, uri, name, trackNum, description);
   return (
     <Card
       header={name}

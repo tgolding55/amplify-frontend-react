@@ -57,6 +57,15 @@ const Home = ({ accessToken }) => {
     if (radioField === "TopTracks") topSongs();
   };
 
+  const newPlaylist = (name, description, publicOrPrivate) => {
+    API.postPlaylist(
+      accessToken,
+      name,
+      description,
+      publicOrPrivate
+    ).then(playlist => setPlaylists([...playlists, playlist]));
+  };
+
   useEffect(resetTopTracks, [radioField]);
 
   useEffect(initialSetup, []);
@@ -104,6 +113,7 @@ const Home = ({ accessToken }) => {
             currentPlaylist={currentPlaylist}
             setCurrentSong={setPlayer}
             removeSongFromPlaylist={removeSongFromPlaylist}
+            newPlaylist={newPlaylist}
           />
         </Grid.Column>
       </Grid.Row>

@@ -7,11 +7,12 @@ import { Card, Button } from "semantic-ui-react";
 const CurrentPlaylistContainer = ({
   currentPlaylist,
   setCurrentSong,
-  removeSongFromPlaylist
+  removeSongFromPlaylist,
+  newPlaylist
 }) => {
   return (
     <div>
-      <PlaylistForm newPlaylist />
+      <PlaylistForm newPlaylist={newPlaylist} />
 
       <Card.Group centered={true} doubling={true}>
         {currentPlaylist.songs.map((song, index) => (
