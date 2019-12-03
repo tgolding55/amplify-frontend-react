@@ -3,7 +3,7 @@ import API from "../adapters/API";
 import ShowContainer from "../containers/ShowContainer";
 import CurrentPlaylistContainer from "../containers/CurrentPlaylistContainer";
 import Player from "../components/Player";
-import { Grid } from "semantic-ui-react";
+import { Grid, Card} from "semantic-ui-react";
 import SearchBar from "../components/SearchBar";
 import SongCard from "../components/SongCard";
 import PlaylistCard from "../components/PlaylistCard";
@@ -95,7 +95,7 @@ const Home = ({ accessToken }) => {
 
       <Grid.Row>
         <Grid.Column floated="left" width={3}>
-          {!loadingLyrics ? lyrics : "Loading Lyrics"}
+          {!loadingLyrics ? <Card extra={lyrics}  />: "Loading Lyrics"}
         </Grid.Column>
         <Grid.Column verticalAlign="middle" width={10}>
           <SearchBar
