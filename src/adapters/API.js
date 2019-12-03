@@ -3,9 +3,15 @@ const SPOTIFY_ENDPOINT = API_ENDPOINT + "spotify/";
 const SONG_QUERY = SPOTIFY_ENDPOINT + "search";
 const PLAYLIST_ENDPOINT = SPOTIFY_ENDPOINT + "playlists";
 const TOPTRACKS_ENDPOINT = SPOTIFY_ENDPOINT + "toptracks";
-
+const  LYRICS_ENDPOINT = SPOTIFY_ENDPOINT + "lyrics";
 const jsonify = resp => resp.json();
 
+//lyrics api
+const fetchLyrics = (artist, track) => 
+fetch(LYRICS_ENDPOINT + '?artist=' + artist + '&track=' + track).then(jsonify);
+
+
+//Spotify api
 const fetchSongQuery = (query, accessToken) =>
   fetch(SONG_QUERY + "?search=" + query + "&auth=" + accessToken).then(jsonify);
 
@@ -31,5 +37,6 @@ export default {
   fetchSongQuery,
   getPlaylists,
   getTopTracks,
-  postPlaylist
+  postPlaylist,
+  fetchLyrics
 };

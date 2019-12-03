@@ -13,7 +13,7 @@ const SongCard = ({
 }) => {
   return (
     <div class="card">
-      <Card onClick={() => handleClick(uri)}>
+      <Card onClick={() => handleClick(uri, band, name)}>
         <Image src={image} wrapped ui={false}></Image>
         <Card.Content>
           <Card.Header>{name}</Card.Header>

@@ -38,6 +38,10 @@ const Home = ({ accessToken }) => {
   });
   const [radioField, setRadioField] = useState("TopTracks");
 
+  const [lyrics, setLyrics] = useState("");
+
+
+
   const addSongToPlaylist = song => {
     setCurrentPlaylist({
       name: currentPlaylist.name,
@@ -52,9 +56,19 @@ const Home = ({ accessToken }) => {
     });
   };
 
-  const setPlayer = URI => {
+  const setPlayer = (URI, band, track )=> {
     setPlayingURI(URI);
-  };
+    if(band && track){
+
+    
+    API.fetchLyrics(
+      band, 
+      track
+    ).then(lyrics => setLyrics(lyrics.result.track.text))
+  } 
+  else 
+    {setLyrics("")}
+};
   const resetTopTracks = () => {
     if (radioField === "TopTracks") topSongs();
   };
@@ -81,7 +95,7 @@ const Home = ({ accessToken }) => {
       </Grid.Row>
 
       <Grid.Row>
-        <Grid.Column floated="left" width={3}></Grid.Column>
+        <Grid.Column floated="left" width={3}>{lyrics}</Grid.Column>
         <Grid.Column verticalAlign="middle" width={10}>
           <SearchBar
             key="searchBar"
