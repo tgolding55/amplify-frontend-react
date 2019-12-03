@@ -20,7 +20,9 @@ const Home = ({ accessToken }) => {
     );
 
   const topSongs = () =>
-    API.getTopTracks(accessToken).then(songs => setSongs(songs));
+    API.getTopTracks(accessToken).then(songs => {
+      setSongs(songs);
+    });
 
   const makeQuery = (query = "pompeii") => {
     setRadioField("search");

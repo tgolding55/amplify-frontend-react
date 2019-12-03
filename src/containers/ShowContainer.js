@@ -1,9 +1,9 @@
 import React from "react";
 
-import { Card, Grid } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 
 const ShowContainer = ({ items, clickEvents, Component }) => {
-  return (    
+  return (
     <Card.Group
       centered={true}
       doubling={true}

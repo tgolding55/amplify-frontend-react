@@ -9,20 +9,20 @@ const PlaylistCard = ({
   description,
   clickEvents: { handleClick }
 }) => {
-  console.log(image, uri, name, trackNum, description);
   return (
-    <Card
-      header={name}
-      image={
-        image
-          ? image.url
-          : "https://cdn.ebaumsworld.com/mediaFiles/picture/718392/84717656.jpg"
-      }
-      description={description}
-      extra={trackNum + " songs"}
-      onClick={() => handleClick(uri)}
-      border={1}
-    />
+    <div class="card">
+      <Card
+        header={name}
+        image={
+          image
+            ? image.url
+            : "https://cdn.ebaumsworld.com/mediaFiles/picture/718392/84717656.jpg"
+        }
+        description={description}
+        extra={trackNum + " songs"}
+        onClick={() => handleClick(uri)}
+      />
+    </div>
   );
 };
 

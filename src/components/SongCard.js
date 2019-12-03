@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, Button } from "semantic-ui-react";
+import { Card, Button, Image } from "semantic-ui-react";
+import humanizeDuration from "humanize-duration";
 
 const SongCard = ({
   id,
@@ -11,17 +12,19 @@ const SongCard = ({
   clickEvents: { handleAddSong, handleClick }
 }) => {
   return (
-    <>
-      <Card
-        header={name}
-        image={image}
-        description={band}
-        extra={`${Math.floor(duration / 1000)} seconds`}
-        onClick={() => handleClick(uri)}
-        border={1}
-      />
-      <Button onClick={() => handleAddSong(id)}></Button>
-    </>
+    <div class="card">
+      <Card onClick={() => handleClick(uri)}>
+        <Image src={image} wrapped ui={false}></Image>
+        <Card.Content>
+          <Card.Header>{name}</Card.Header>
+          <Card.Description>{band}</Card.Description>
+          <Card.Meta>
+            {humanizeDuration(Math.round(duration / 1000) * 1000)}
+          </Card.Meta>
+          <Button onClick={() => handleAddSong(id)}></Button>
+        </Card.Content>
+      </Card>
+    </div>
   );
 };
 
