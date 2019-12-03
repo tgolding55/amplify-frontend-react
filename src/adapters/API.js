@@ -3,13 +3,14 @@ const SPOTIFY_ENDPOINT = API_ENDPOINT + "spotify/";
 const SONG_QUERY = SPOTIFY_ENDPOINT + "search";
 const PLAYLIST_ENDPOINT = SPOTIFY_ENDPOINT + "playlists";
 const TOPTRACKS_ENDPOINT = SPOTIFY_ENDPOINT + "toptracks";
-const  LYRICS_ENDPOINT = SPOTIFY_ENDPOINT + "lyrics";
+const LYRICS_ENDPOINT = SPOTIFY_ENDPOINT + "lyrics";
 const jsonify = resp => resp.json();
 
 //lyrics api
-const fetchLyrics = (artist, track) => 
-fetch(LYRICS_ENDPOINT + '?artist=' + artist + '&track=' + track).then(jsonify);
-
+const fetchLyrics = (artist, track) =>
+  fetch(LYRICS_ENDPOINT + "?artist=" + artist + "&track=" + track).then(
+    jsonify
+  );
 
 //Spotify api
 const fetchSongQuery = (query, accessToken) =>
@@ -33,10 +34,28 @@ const postPlaylist = (accessToken, name, description, publicBool) => {
   }).then(jsonify);
 };
 
+const addToPlaylist = (accessToken, playlistId, songURIs) => {
+  console.log(playlistId, songURIs);
+  return fetch(
+    PLAYLIST_ENDPOINT +
+      "/" +
+      playlistId +
+      "/" +
+      "?auth=" +
+      accessToken +
+      "&playlistId=" +
+      playlistId +
+      "&songURIs=" +
+      songURIs.join("%2C"),
+    { method: "POST" }
+  ).then(jsonify);
+};
+
 export default {
   fetchSongQuery,
   getPlaylists,
   getTopTracks,
   postPlaylist,
-  fetchLyrics
+  fetchLyrics,
+  addToPlaylist
 };

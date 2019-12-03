@@ -8,11 +8,24 @@ const CurrentPlaylistContainer = ({
   songsToAdd,
   setPlayer,
   removeSongFromPlaylist,
-  newPlaylist
+  newPlaylist,
+  currentPlaylist,
+  setCurrentPlaylist,
+  playlists,
+  setSongsToAdd,
+  addToPlaylist
 }) => {
   return (
     <div>
-      <PlaylistForm key={"NewPlaylistForm"} newPlaylist={newPlaylist} />
+      <PlaylistForm
+        key={"NewPlaylistForm"}
+        newPlaylist={newPlaylist}
+        setCurrentPlaylist={setCurrentPlaylist}
+        currentPlaylist={currentPlaylist}
+        playlists={playlists}
+        setSongsToAdd={setSongsToAdd}
+        addToPlaylist={addToPlaylist}
+      />
 
       <Card.Group key={"SongsToAddCardGroup"} centered={true} doubling={true}>
         {songsToAdd.map((song, index) => (

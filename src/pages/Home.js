@@ -20,13 +20,19 @@ const Home = ({ accessToken }) => {
     );
 
   const topSongs = () =>
-    API.getTopTracks(accessToken).then(songs => {
-      setSongs(songs);
-    });
+    API.getTopTracks(accessToken).then(songs => setSongs(songs));
 
   const makeQuery = (query = "pompeii") => {
     setRadioField("search");
     API.fetchSongQuery(query, accessToken).then(songs => setSongs(songs));
+  };
+
+  const addToPlaylist = () => {
+    API.addToPlaylist(
+      accessToken,
+      currentPlaylist.id,
+      songsToAdd.map(song => song.uri)
+    ).then(getPlaylists);
   };
 
   const [songs, setSongs] = useState([]);
@@ -36,14 +42,13 @@ const Home = ({ accessToken }) => {
   const [loadingLyrics, setLoadingLyrics] = useState(false);
   const [lyrics, setLyrics] = useState("");
   const [songsToAdd, setSongsToAdd] = useState([]);
+  const [currentPlaylist, setCurrentPlaylist] = useState({});
 
-  const addSongToPlaylist = songId => {
+  const addSongToPlaylist = songId =>
     setSongsToAdd([...songsToAdd, songs.find(song => song.id === songId)]);
-  };
 
-  const removeSongFromPlaylist = songIndex => {
+  const removeSongFromPlaylist = songIndex =>
     setSongsToAdd(songsToAdd.filter((song, index) => index !== songIndex));
-  };
 
   const setPlayer = (URI, band, track) => {
     setPlayingURI(URI);
@@ -129,6 +134,11 @@ const Home = ({ accessToken }) => {
               setPlayer={setPlayer}
               removeSongFromPlaylist={removeSongFromPlaylist}
               newPlaylist={newPlaylist}
+              currentPlaylist={currentPlaylist}
+              setCurrentPlaylist={setCurrentPlaylist}
+              playlists={playlists}
+              setSongsToAdd={setSongsToAdd}
+              addToPlaylist={addToPlaylist}
             />
           </Grid.Column>
         </Grid.Row>

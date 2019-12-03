@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { Checkbox, Form, Button, Card } from "semantic-ui-react";
+import { Checkbox, Form, Button, Card, Dropdown } from "semantic-ui-react";
 
-const PlaylistForm = ({ newPlaylist }) => {
+const PlaylistForm = ({
+  newPlaylist,
+  setCurrentPlaylist,
+  playlists,
+  setSongsToAdd,
+  addToPlaylist
+}) => {
   const [nameField, setNameField] = useState("");
   const [descriptionField, setDescriptionField] = useState("");
   const [publicField, setPublicField] = useState(true);
@@ -10,7 +16,6 @@ const PlaylistForm = ({ newPlaylist }) => {
     e.preventDefault();
     newPlaylist(nameField, descriptionField, publicField);
   };
-
   return (
     <div className="card">
       <Card>
@@ -49,8 +54,34 @@ const PlaylistForm = ({ newPlaylist }) => {
             </Form.Field>
             <Button type="submit">Create Playlist</Button>
           </Form>
+        </Card.Content>
+      </Card>
 
-          
+      <Card>
+        <Card.Header>Selected Playlist</Card.Header>
+        <Card.Content>
+          <Dropdown
+            fluid={true}
+            placeholder="Select Playlist"
+            options={playlists.map(playlist => {
+              return {
+                key: "option" + playlist.name,
+                value: playlist.id,
+                text: playlist.name
+              };
+            })}
+            onChange={(e, { value }) =>
+              setCurrentPlaylist(
+                playlists.find(playlist => playlist.id === value)
+              )
+            }
+          ></Dropdown>
+          <Button positive onClick={() => addToPlaylist()}>
+            Save Songs
+          </Button>
+          <Button negative onClick={() => setSongsToAdd([])}>
+            Clear Songs
+          </Button>
         </Card.Content>
       </Card>
     </div>
