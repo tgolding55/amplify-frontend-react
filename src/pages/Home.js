@@ -37,10 +37,8 @@ const Home = ({ accessToken }) => {
     songs: []
   });
   const [radioField, setRadioField] = useState("TopTracks");
-
+  const [loadingLyrics, setLoadingLyrics] = useState(false);
   const [lyrics, setLyrics] = useState("");
-
-
 
   const addSongToPlaylist = song => {
     setCurrentPlaylist({
@@ -56,19 +54,20 @@ const Home = ({ accessToken }) => {
     });
   };
 
-  const setPlayer = (URI, band, track )=> {
+  const setPlayer = (URI, band, track) => {
     setPlayingURI(URI);
-    if(band && track){
-
-    
-    API.fetchLyrics(
-      band, 
-      track
-    ).then(lyrics => setLyrics(lyrics.result.track.text))
-  } 
-  else 
-    {setLyrics("")}
-};
+    if (band && track) {
+      setLoadingLyrics(true);
+      API.fetchLyrics(band, track).then(lyrics => {
+        setLyrics(
+          lyrics.result ? lyrics.result.track.text : "Lyrics Not Found!"
+        );
+        setLoadingLyrics(false);
+      });
+    } else {
+      setLyrics("");
+    }
+  };
   const resetTopTracks = () => {
     if (radioField === "TopTracks") topSongs();
   };
@@ -95,7 +94,9 @@ const Home = ({ accessToken }) => {
       </Grid.Row>
 
       <Grid.Row>
-        <Grid.Column floated="left" width={3}>{lyrics}</Grid.Column>
+        <Grid.Column floated="left" width={3}>
+          {!loadingLyrics ? lyrics : "Loading Lyrics"}
+        </Grid.Column>
         <Grid.Column verticalAlign="middle" width={10}>
           <SearchBar
             key="searchBar"
