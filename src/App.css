@@ -3,6 +3,10 @@
   width: 100%;
 }
 
+body {
+  background-color: lightgray;
+}
+
 .App-logo {
   height: 40vmin;
 }
@@ -32,5 +36,5 @@
 }
 
 body {
-  font-family: 'Solway', serif;
+  font-family: "Solway", serif;
 }

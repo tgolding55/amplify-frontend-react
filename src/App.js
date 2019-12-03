@@ -8,7 +8,6 @@ import queryString from "querystring";
 
 function App() {
   const [accessToken, setAccessToken] = useState(null);
-
   return (
     <div className="App">
       <Route

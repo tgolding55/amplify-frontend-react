@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createRef } from "react";
 import API from "../adapters/API";
 import ShowContainer from "../containers/ShowContainer";
 import CurrentPlaylistContainer from "../containers/CurrentPlaylistContainer";
 import Player from "../components/Player";
-import { Grid, Card} from "semantic-ui-react";
+import { Grid, Card, Sticky, Ref } from "semantic-ui-react";
 import SearchBar from "../components/SearchBar";
 import SongCard from "../components/SongCard";
 import PlaylistCard from "../components/PlaylistCard";
@@ -32,26 +32,17 @@ const Home = ({ accessToken }) => {
   const [songs, setSongs] = useState([]);
   const [playingURI, setPlayingURI] = useState("");
   const [playlists, setPlaylists] = useState([]);
-  const [currentPlaylist, setCurrentPlaylist] = useState({
-    name: "",
-    songs: []
-  });
   const [radioField, setRadioField] = useState("TopTracks");
   const [loadingLyrics, setLoadingLyrics] = useState(false);
   const [lyrics, setLyrics] = useState("");
+  const [songsToAdd, setSongsToAdd] = useState([]);
 
-  const addSongToPlaylist = song => {
-    setCurrentPlaylist({
-      name: currentPlaylist.name,
-      songs: [...currentPlaylist.songs, song]
-    });
+  const addSongToPlaylist = songId => {
+    setSongsToAdd([...songsToAdd, songs.find(song => song.id === songId)]);
   };
 
-  const removeSongFromPlaylist = songToRemove => {
-    setCurrentPlaylist({
-      name: currentPlaylist.name,
-      songs: currentPlaylist.songs.filter(song => song !== songToRemove)
-    });
+  const removeSongFromPlaylist = songIndex => {
+    setSongsToAdd(songsToAdd.filter((song, index) => index !== songIndex));
   };
 
   const setPlayer = (URI, band, track) => {
@@ -85,56 +76,64 @@ const Home = ({ accessToken }) => {
 
   useEffect(initialSetup, []);
 
+  const contextRef = createRef();
+
   return (
-    <Grid stackable column={3}>
-      <Grid.Row>
-        <Grid.Column>
-          <Player uri={playingURI} />
-        </Grid.Column>
-      </Grid.Row>
+    <Ref innerRef={contextRef}>
+      <Grid stackable column={3}>
+        <Grid.Row>
+          <Grid.Column>
+            <Sticky context={contextRef}>
+              <Player uri={playingURI} />
+            </Sticky>
+          </Grid.Column>
+        </Grid.Row>
 
-      <Grid.Row>
-        <Grid.Column floated="left" width={3}>
-          {!loadingLyrics ? <Card extra={lyrics}  />: "Loading Lyrics"}
-        </Grid.Column>
-        <Grid.Column verticalAlign="middle" width={10}>
-          <SearchBar
-            key="searchBar"
-            handleSubmit={makeQuery}
-            radioField={radioField}
-            setRadioField={setRadioField}
-          />
-          <br></br>
+        <Grid.Row>
+          <Grid.Column floated="left" width={3}>
+            <div className="card">
+              <Card extra={!loadingLyrics ? lyrics : "Loading Lyrics"} />
+            </div>
+          </Grid.Column>
+          <Grid.Column verticalAlign="middle" width={10}>
+            <SearchBar
+              key="searchBar"
+              handleSubmit={makeQuery}
+              radioField={radioField}
+              setRadioField={setRadioField}
+            />
+            <br></br>
 
-          <Grid.Row>
-            {radioField === "Playlists" ? (
-              <ShowContainer
-                items={playlists}
-                Component={PlaylistCard}
-                clickEvents={{ handleClick: setPlayer }}
-              />
-            ) : (
-              <ShowContainer
-                items={songs}
-                clickEvents={{
-                  handleClick: setPlayer,
-                  handleAddSong: addSongToPlaylist
-                }}
-                Component={SongCard}
-              />
-            )}
-          </Grid.Row>
-        </Grid.Column>
-        <Grid.Column floated="right" width={3}>
-          <CurrentPlaylistContainer
-            currentPlaylist={currentPlaylist}
-            setCurrentSong={setPlayer}
-            removeSongFromPlaylist={removeSongFromPlaylist}
-            newPlaylist={newPlaylist}
-          />
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
+            <Grid.Row>
+              {radioField === "Playlists" ? (
+                <ShowContainer
+                  items={playlists}
+                  Component={PlaylistCard}
+                  clickEvents={{ handleClick: setPlayer }}
+                />
+              ) : (
+                <ShowContainer
+                  items={songs}
+                  clickEvents={{
+                    handleClick: setPlayer,
+                    actionSong: addSongToPlaylist
+                  }}
+                  Component={SongCard}
+                />
+              )}
+            </Grid.Row>
+          </Grid.Column>
+          <Grid.Column floated="right" width={3}>
+            <CurrentPlaylistContainer
+              songsToAdd={songsToAdd}
+              setPlayer={setPlayer}
+              removeSongFromPlaylist={removeSongFromPlaylist}
+              newPlaylist={newPlaylist}
+            />
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </Ref>
   );
 };
 

@@ -9,7 +9,8 @@ const SongCard = ({
   image,
   band,
   duration,
-  clickEvents: { handleAddSong, handleClick }
+  clickEvents: { handleClick },
+  actionButton
 }) => {
   return (
     <div className="card">
@@ -21,7 +22,7 @@ const SongCard = ({
           <Card.Meta>
             {humanizeDuration(Math.round(duration / 1000) * 1000)}
           </Card.Meta>
-          <Button onClick={() => handleAddSong(id)}></Button>
+          {actionButton}
         </Card.Content>
       </Card>
     </div>

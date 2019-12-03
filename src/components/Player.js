@@ -1,5 +1,4 @@
 import React from "react";
-import { Sticky } from "semantic-ui-react";
 
 const Player = ({ uri }) => {
   const [, type, id] = uri.length ? uri.split(":") : "";

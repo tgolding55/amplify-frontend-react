@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Card } from "semantic-ui-react";
+import { Card, Button } from "semantic-ui-react";
 
 const ShowContainer = ({ items, clickEvents, Component }) => {
   return (
@@ -16,6 +16,15 @@ const ShowContainer = ({ items, clickEvents, Component }) => {
             key={index + item.id}
             {...item}
             clickEvents={clickEvents}
+            actionButton={
+              <Button
+                positive
+                key={item.id + Math.random()}
+                onClick={() => clickEvents.actionSong(item.id)}
+              >
+                Add
+              </Button>
+            }
           />
         </div>
       ))}
