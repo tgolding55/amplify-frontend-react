@@ -56,12 +56,17 @@ const Home = ({ accessToken }) => {
 
   const setPlayer = (URI, band, track )=> {
     setPlayingURI(URI);
+    if(band && track){
+
+    
     API.fetchLyrics(
       band, 
       track
-
     ).then(lyrics => setLyrics(lyrics.result.track.text))
-  };
+  } 
+  else 
+    {setLyrics("")}
+};
   const resetTopTracks = () => {
     if (radioField === "TopTracks") topSongs();
   };
