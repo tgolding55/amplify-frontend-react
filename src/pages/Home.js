@@ -136,8 +136,8 @@ const Home = ({ accessToken }) => {
                 </Card>
               </div>
             </Grid.Column>
-            <Grid.Column verticalAlign="middle" width={10}>
-              <Grid.Row>
+            <Grid.Column verticalAlign="top" width={10}>
+              <Grid.Row verticalAlign="top">
                 <SearchBar
                   key="searchBar"
                   handleSubmit={makeQuery}

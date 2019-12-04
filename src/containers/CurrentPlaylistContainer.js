@@ -31,27 +31,35 @@ const CurrentPlaylistContainer = ({
         </Grid.Row>
 
         <Grid.Row>
-          <Card.Group key={"SongsToAddCardGroup"} className="playlistShow">
-            {songsToAdd.map((song, index) => (
-              <SongCard
-                key={index + song.id + "songToAdd"}
-                {...song}
-                clickEvents={{
-                  handleClick: setPlayer
-                }}
-                handleClick={setPlayer}
-                actionButton={
-                  <Button
-                    negative
-                    key={"songToRemove" + index}
-                    onClick={() => removeSongFromPlaylist(index)}
-                  >
-                    Remove
-                  </Button>
-                }
-              />
-            ))}
-          </Card.Group>
+          <Card>
+            <Card.Header>
+              Songs To Be Added | {songsToAdd.length}{" "}
+              {songsToAdd.length === 1 ? "song" : "songs"}
+            </Card.Header>
+            <Card.Content>
+              <Card.Group key={"SongsToAddCardGroup"} className="playlistShow">
+                {songsToAdd.map((song, index) => (
+                  <SongCard
+                    key={index + song.id + "songToAdd"}
+                    {...song}
+                    clickEvents={{
+                      handleClick: setPlayer
+                    }}
+                    handleClick={setPlayer}
+                    actionButton={
+                      <Button
+                        negative
+                        key={"songToRemove" + index}
+                        onClick={() => removeSongFromPlaylist(index)}
+                      >
+                        Remove
+                      </Button>
+                    }
+                  />
+                ))}
+              </Card.Group>
+            </Card.Content>
+          </Card>
         </Grid.Row>
       </Grid.Column>
     </Grid>
