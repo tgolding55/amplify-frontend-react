@@ -19,8 +19,10 @@ const fetchSongQuery = (query, accessToken) =>
 const getPlaylists = accessToken =>
   fetch(PLAYLIST_ENDPOINT + "?auth=" + accessToken).then(jsonify);
 
-const getTopTracks = accessToken =>
-  fetch(TOPTRACKS_ENDPOINT + "?auth=" + accessToken).then(jsonify);
+const getTopTracks = (accessToken, timeRange) =>
+  fetch(
+    TOPTRACKS_ENDPOINT + "?auth=" + accessToken + "&time_range=" + timeRange
+  ).then(jsonify);
 
 const postPlaylist = (accessToken, name, description, publicBool) => {
   const body = { name: name, description: description, public: publicBool };

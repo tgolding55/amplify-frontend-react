@@ -10,7 +10,7 @@ const PlaylistCard = ({
   clickEvents: { handleClick }
 }) => {
   return (
-    <div class="card">
+    <div className="card">
       <Card
         header={name}
         image={

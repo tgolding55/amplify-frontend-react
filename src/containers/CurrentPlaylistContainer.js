@@ -33,8 +33,7 @@ const CurrentPlaylistContainer = ({
             key={index + song.id + "songToAdd"}
             {...song}
             clickEvents={{
-              handleClick: setPlayer,
-              actionSong: removeSongFromPlaylist
+              handleClick: setPlayer
             }}
             handleClick={setPlayer}
             actionButton={

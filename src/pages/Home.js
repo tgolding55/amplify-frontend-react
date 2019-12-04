@@ -9,6 +9,16 @@ import SongCard from "../components/SongCard";
 import PlaylistCard from "../components/PlaylistCard";
 
 const Home = ({ accessToken }) => {
+  const [songs, setSongs] = useState([]);
+  const [playingURI, setPlayingURI] = useState("");
+  const [playlists, setPlaylists] = useState([]);
+  const [radioField, setRadioField] = useState("TopTracks");
+  const [topTracksTimeFrame, setTopTracksTimeFrame] = useState("long_term");
+  const [loadingLyrics, setLoadingLyrics] = useState(false);
+  const [lyrics, setLyrics] = useState("");
+  const [songsToAdd, setSongsToAdd] = useState([]);
+  const [currentPlaylist, setCurrentPlaylist] = useState({});
+
   const initialSetup = () => {
     topSongs();
     getPlaylists();
@@ -19,8 +29,11 @@ const Home = ({ accessToken }) => {
       setPlaylists(newPlaylists)
     );
 
-  const topSongs = () =>
-    API.getTopTracks(accessToken).then(songs => setSongs(songs));
+  const topSongs = () => {
+    API.getTopTracks(accessToken, topTracksTimeFrame).then(songs =>
+      setSongs(songs)
+    );
+  };
 
   const makeQuery = (query = "pompeii") => {
     setRadioField("search");
@@ -34,15 +47,6 @@ const Home = ({ accessToken }) => {
       songsToAdd.map(song => song.uri)
     ).then(getPlaylists);
   };
-
-  const [songs, setSongs] = useState([]);
-  const [playingURI, setPlayingURI] = useState("");
-  const [playlists, setPlaylists] = useState([]);
-  const [radioField, setRadioField] = useState("TopTracks");
-  const [loadingLyrics, setLoadingLyrics] = useState(false);
-  const [lyrics, setLyrics] = useState("");
-  const [songsToAdd, setSongsToAdd] = useState([]);
-  const [currentPlaylist, setCurrentPlaylist] = useState({});
 
   const addSongToPlaylist = songId =>
     setSongsToAdd([...songsToAdd, songs.find(song => song.id === songId)]);
@@ -78,6 +82,7 @@ const Home = ({ accessToken }) => {
   };
 
   useEffect(resetTopTracks, [radioField]);
+  useEffect(topSongs, [topTracksTimeFrame]);
 
   useEffect(initialSetup, []);
 
@@ -106,6 +111,8 @@ const Home = ({ accessToken }) => {
               handleSubmit={makeQuery}
               radioField={radioField}
               setRadioField={setRadioField}
+              setTopTracksTimeFrame={setTopTracksTimeFrame}
+              topTracksTimeFrame={topTracksTimeFrame}
             />
             <br></br>
 

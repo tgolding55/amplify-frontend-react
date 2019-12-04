@@ -1,6 +1,12 @@
 import React, { useState } from "react";
-import { Radio } from "semantic-ui-react";
-const SearchBar = ({ handleSubmit, radioField, setRadioField }) => {
+import { Radio, Dropdown } from "semantic-ui-react";
+const SearchBar = ({
+  handleSubmit,
+  radioField,
+  setRadioField,
+  setTopTracksTimeFrame,
+  topTracksTimeFrame
+}) => {
   const [inputField, setInputField] = useState("");
 
   return (
@@ -33,14 +39,25 @@ const SearchBar = ({ handleSubmit, radioField, setRadioField }) => {
           }}
         ></Radio>
         <Radio
-          label="TopTracks"
+          label="Top Tracks"
           name="radioGroup"
           value="TopTracks"
           checked={radioField === "TopTracks"}
-          onChange={e => {
-            setRadioField(e.target.innerText);
+          onChange={(e, { value }) => {
+            setRadioField(value);
           }}
         ></Radio>
+        <Dropdown
+          fluid
+          selection
+          value={topTracksTimeFrame}
+          options={[
+            { key: "long_term", text: "Long Term", value: "long_term" },
+            { key: "medium_term", text: "Medium Term", value: "medium_term" },
+            { key: "short_term", text: "Short Term", value: "short_term" }
+          ]}
+          onChange={(e, { value }) => setTopTracksTimeFrame(value)}
+        ></Dropdown>
       </div>
     </form>
   );

@@ -1,9 +1,8 @@
 import React from "react";
-import { Card, Button, Image } from "semantic-ui-react";
+import { Card, Image } from "semantic-ui-react";
 import humanizeDuration from "humanize-duration";
 
 const SongCard = ({
-  id,
   uri,
   name,
   image,
