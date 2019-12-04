@@ -52,7 +52,7 @@ const PlaylistForm = ({
                   checked={publicField}
                   onChange={() => setPublicField(!publicField)}
                 ></Checkbox>{" "}
-                | <Button type="submit">Create Playlist</Button>
+                <Button type="submit">Create Playlist</Button>
               </Form.Field>
             </Form>
           </Card.Content>
