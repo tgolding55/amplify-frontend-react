@@ -36,21 +36,22 @@ const postPlaylist = (accessToken, name, description, publicBool) => {
   }).then(jsonify);
 };
 
-const addToPlaylist = (accessToken, playlistId, songURIs) => {
-  return fetch(
+const addToPlaylist = (accessToken, playlistId, songURIs) =>
+  fetch(
     PLAYLIST_ENDPOINT +
       "/" +
       playlistId +
-      "/" +
-      "?auth=" +
+      "/?auth=" +
       accessToken +
-      "&playlistId=" +
-      playlistId +
       "&songURIs=" +
       songURIs.join("%2C"),
     { method: "POST" }
   ).then(jsonify);
-};
+
+const getTrackFromPlaylist = (accessToken, playlistId) =>
+  fetch(PLAYLIST_ENDPOINT + "/" + playlistId + "/?auth=" + accessToken).then(
+    jsonify
+  );
 
 export default {
   fetchSongQuery,
@@ -58,5 +59,6 @@ export default {
   getTopTracks,
   postPlaylist,
   fetchLyrics,
-  addToPlaylist
+  addToPlaylist,
+  getTrackFromPlaylist
 };

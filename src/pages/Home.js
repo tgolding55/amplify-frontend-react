@@ -3,13 +3,14 @@ import API from "../adapters/API";
 import ShowContainer from "../containers/ShowContainer";
 import CurrentPlaylistContainer from "../containers/CurrentPlaylistContainer";
 import Player from "../components/Player";
-import { Grid, Card, Sticky, Ref } from "semantic-ui-react";
+import { Grid, Card, Sticky, Ref, Loader } from "semantic-ui-react";
 import SearchBar from "../components/SearchBar";
 import SongCard from "../components/SongCard";
 import PlaylistCard from "../components/PlaylistCard";
 
 const Home = ({ accessToken }) => {
   const [songs, setSongs] = useState([]);
+  const [loadingContent, setLoadingContent] = useState(false);
   const [playingURI, setPlayingURI] = useState("");
   const [playlists, setPlaylists] = useState([]);
   const [radioField, setRadioField] = useState("TopTracks");
@@ -35,9 +36,16 @@ const Home = ({ accessToken }) => {
     );
   };
 
-  const makeQuery = (query = "pompeii") => {
+  const makeQuery = query => {
     setRadioField("search");
     API.fetchSongQuery(query, accessToken).then(songs => setSongs(songs));
+  };
+
+  const getPlaylist = playlistId => {
+    setRadioField("search");
+    API.getTrackFromPlaylist(accessToken, playlistId).then(songs =>
+      setSongs(songs)
+    );
   };
 
   const addToPlaylist = () => {
@@ -102,7 +110,9 @@ const Home = ({ accessToken }) => {
         <Grid.Row>
           <Grid.Column floated="left" width={3}>
             <div className="card">
-              <Card extra={!loadingLyrics ? lyrics : "Loading Lyrics"} />
+              <Card
+                extra={!loadingLyrics ? lyrics : <Loader active inline />}
+              />
             </div>
           </Grid.Column>
           <Grid.Column verticalAlign="middle" width={10}>
@@ -121,7 +131,11 @@ const Home = ({ accessToken }) => {
                 <ShowContainer
                   items={playlists}
                   Component={PlaylistCard}
-                  clickEvents={{ handleClick: setPlayer }}
+                  clickEvents={{
+                    handleClick: setPlayer,
+                    actionSong: getPlaylist
+                  }}
+                  buttonText="View Playlist"
                 />
               ) : (
                 <ShowContainer
@@ -131,6 +145,7 @@ const Home = ({ accessToken }) => {
                     actionSong: addSongToPlaylist
                   }}
                   Component={SongCard}
+                  buttonText="Add"
                 />
               )}
             </Grid.Row>

@@ -77,12 +77,15 @@ const PlaylistForm = ({
               )
             }
           ></Dropdown>
+          <br></br>
           <Button positive onClick={() => addToPlaylist()}>
             Save Songs
           </Button>
+
           <Button negative onClick={() => setSongsToAdd([])}>
             Clear Songs
           </Button>
+          <br></br>
         </Card.Content>
       </Card>
     </div>

@@ -47,7 +47,7 @@ const SearchBar = ({
             setRadioField(value);
           }}
         ></Radio>
-        <Dropdown
+        {radioField === "TopTracks" && <Dropdown
           fluid
           selection
           value={topTracksTimeFrame}
@@ -57,7 +57,7 @@ const SearchBar = ({
             { key: "short_term", text: "Short Term", value: "short_term" }
           ]}
           onChange={(e, { value }) => setTopTracksTimeFrame(value)}
-        ></Dropdown>
+        ></Dropdown>}
       </div>
     </form>
   );

@@ -18,6 +18,7 @@ const SongCard = ({
           src={image}
           className="cardImage"
           wrapped
+          fluid
           ui={false}
           onClick={() => handleClick(uri, band, name)}
         ></Image>

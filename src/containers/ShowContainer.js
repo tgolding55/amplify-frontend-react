@@ -2,7 +2,7 @@ import React from "react";
 
 import { Card, Button } from "semantic-ui-react";
 
-const ShowContainer = ({ items, clickEvents, Component }) => {
+const ShowContainer = ({ items, clickEvents, Component, buttonText }) => {
   return (
     <Card.Group
       centered={true}
@@ -22,7 +22,7 @@ const ShowContainer = ({ items, clickEvents, Component }) => {
                 key={item.id + Math.random()}
                 onClick={() => clickEvents.actionSong(item.id)}
               >
-                Add
+                {buttonText}
               </Button>
             }
           />
