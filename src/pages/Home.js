@@ -8,6 +8,7 @@ import SearchBar from "../components/SearchBar";
 import SongCard from "../components/SongCard";
 import PlaylistCard from "../components/PlaylistCard";
 
+
 const Home = ({ accessToken }) => {
   const [songs, setSongs] = useState([]);
   const [loadingContent, setLoadingContent] = useState(false);

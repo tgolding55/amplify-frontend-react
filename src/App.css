@@ -65,6 +65,7 @@ body {
 .logo {
   background-image: url(logo.png);
   background-size: 200px;
+
   background-repeat: no-repeat;
   margin-left: -100px;
   margin-top: 40px;
