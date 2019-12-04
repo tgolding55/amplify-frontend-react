@@ -27,7 +27,12 @@ const CurrentPlaylistContainer = ({
         addToPlaylist={addToPlaylist}
       />
 
-      <Card.Group key={"SongsToAddCardGroup"} centered={true} doubling={true}>
+      <Card.Group
+        key={"SongsToAddCardGroup"}
+        className="songsToShow"
+        centered={true}
+        doubling={true}
+      >
         {songsToAdd.map((song, index) => (
           <SongCard
             key={index + song.id + "songToAdd"}
