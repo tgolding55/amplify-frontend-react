@@ -63,6 +63,7 @@ const PlaylistForm = ({
           <Dropdown
             fluid={true}
             placeholder="Select Playlist"
+            selection
             options={playlists.map(playlist => {
               return {
                 key: "option" + playlist.name,
