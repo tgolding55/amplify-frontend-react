@@ -8,11 +8,12 @@ import SearchBar from "../components/SearchBar";
 import SongCard from "../components/SongCard";
 import PlaylistCard from "../components/PlaylistCard";
 
-
 const Home = ({ accessToken }) => {
   const [songs, setSongs] = useState([]);
   const [loadingContent, setLoadingContent] = useState(false);
-  const [playingURI, setPlayingURI] = useState("");
+  const [playingURI, setPlayingURI] = useState(
+    "spotify:track:4Ub8UsjWuewQrPhuepfVpd"
+  );
   const [playlists, setPlaylists] = useState([]);
   const [radioField, setRadioField] = useState("TopTracks");
   const [topTracksTimeFrame, setTopTracksTimeFrame] = useState("long_term");
@@ -124,9 +125,15 @@ const Home = ({ accessToken }) => {
           <Grid.Row>
             <Grid.Column floated="left" width={3}>
               <div className="card">
-                <Card
-                  extra={!loadingLyrics ? lyrics : <Loader active inline />}
-                />
+                <Card>
+                  <Card.Header>Lyrics</Card.Header>
+
+                  <Card.Content>
+                    <Card.Meta>
+                      {!loadingLyrics ? lyrics : <Loader active inline />}
+                    </Card.Meta>
+                  </Card.Content>
+                </Card>
               </div>
             </Grid.Column>
             <Grid.Column verticalAlign="middle" width={10}>
