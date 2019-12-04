@@ -47,17 +47,31 @@ const SearchBar = ({
             setRadioField(value);
           }}
         ></Radio>
-        {radioField === "TopTracks" && <Dropdown
-          fluid
-          selection
-          value={topTracksTimeFrame}
-          options={[
-            { key: "long_term", text: "Long Term", value: "long_term" },
-            { key: "medium_term", text: "Medium Term", value: "medium_term" },
-            { key: "short_term", text: "Short Term", value: "short_term" }
-          ]}
-          onChange={(e, { value }) => setTopTracksTimeFrame(value)}
-        ></Dropdown>}
+        {radioField === "TopTracks" && (
+          <Dropdown
+            fluid
+            selection
+            value={topTracksTimeFrame}
+            options={[
+              {
+                key: "long_term",
+                text: "Most Played All Time",
+                value: "long_term"
+              },
+              {
+                key: "medium_term",
+                text: "Most Played Recently",
+                value: "medium_term"
+              },
+              {
+                key: "short_term",
+                text: "Most Played Very Recently",
+                value: "short_term"
+              }
+            ]}
+            onChange={(e, { value }) => setTopTracksTimeFrame(value)}
+          ></Dropdown>
+        )}
       </div>
     </form>
   );

@@ -7,23 +7,9 @@ body {
   background-color: lightgray;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
+.rightColumnCard {
+  height: 100%;
+  padding: 10px 0px 10px 0px;
 }
 
 .card {
@@ -35,9 +21,18 @@ body {
   font-size: 20px;
 }
 
-.songsToShow {
+.show {
   overflow-y: auto;
-  max-height: 60vh;
+  max-height: 75vh;
+  height: 100%;
+  width: auto;
+  scroll-padding: 10px 10px 10px 10px;
+}
+
+.playlistShow {
+  overflow-y: auto;
+  max-height: 45vh;
+  height: 100%;
   width: auto;
   scroll-padding: 10px 10px 10px 10px;
 }
