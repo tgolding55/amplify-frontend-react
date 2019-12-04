@@ -21,31 +21,43 @@ const Home = ({ accessToken }) => {
   const [currentPlaylist, setCurrentPlaylist] = useState({});
 
   const initialSetup = () => {
+    setLoadingContent(true);
     topSongs();
     getPlaylists();
   };
 
-  const getPlaylists = () =>
-    API.getPlaylists(accessToken).then(newPlaylists =>
-      setPlaylists(newPlaylists)
-    );
+  const getPlaylists = () => {
+    setLoadingContent(true);
+    API.getPlaylists(accessToken).then(newPlaylists => {
+      setPlaylists(newPlaylists);
+      setLoadingContent(false);
+    });
+  };
 
   const topSongs = () => {
-    API.getTopTracks(accessToken, topTracksTimeFrame).then(songs =>
-      setSongs(songs)
-    );
+    setLoadingContent(true);
+    API.getTopTracks(accessToken, topTracksTimeFrame).then(songs => {
+      setSongs(songs);
+      setLoadingContent(false);
+    });
   };
 
   const makeQuery = query => {
+    setLoadingContent(true);
     setRadioField("search");
-    API.fetchSongQuery(query, accessToken).then(songs => setSongs(songs));
+    API.fetchSongQuery(query, accessToken).then(songs => {
+      setSongs(songs);
+      setLoadingContent(false);
+    });
   };
 
   const getPlaylist = playlistId => {
+    setLoadingContent(true);
     setRadioField("search");
-    API.getTrackFromPlaylist(accessToken, playlistId).then(songs =>
-      setSongs(songs)
-    );
+    API.getTrackFromPlaylist(accessToken, playlistId).then(songs => {
+      setSongs(songs);
+      setLoadingContent(false);
+    });
   };
 
   const addToPlaylist = () => {
@@ -127,26 +139,30 @@ const Home = ({ accessToken }) => {
             <br></br>
 
             <Grid.Row>
-              {radioField === "Playlists" ? (
-                <ShowContainer
-                  items={playlists}
-                  Component={PlaylistCard}
-                  clickEvents={{
-                    handleClick: setPlayer,
-                    actionSong: getPlaylist
-                  }}
-                  buttonText="View Playlist"
-                />
+              {!loadingContent ? (
+                radioField === "Playlists" ? (
+                  <ShowContainer
+                    items={playlists}
+                    Component={PlaylistCard}
+                    clickEvents={{
+                      handleClick: setPlayer,
+                      actionSong: getPlaylist
+                    }}
+                    buttonText="View Playlist"
+                  />
+                ) : (
+                  <ShowContainer
+                    items={songs}
+                    clickEvents={{
+                      handleClick: setPlayer,
+                      actionSong: addSongToPlaylist
+                    }}
+                    Component={SongCard}
+                    buttonText="Add"
+                  />
+                )
               ) : (
-                <ShowContainer
-                  items={songs}
-                  clickEvents={{
-                    handleClick: setPlayer,
-                    actionSong: addSongToPlaylist
-                  }}
-                  Component={SongCard}
-                  buttonText="Add"
-                />
+                <Loader active inline />
               )}
             </Grid.Row>
           </Grid.Column>
