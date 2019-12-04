@@ -4,6 +4,7 @@ import { Card, Button } from "semantic-ui-react";
 
 const ShowContainer = ({ items, clickEvents, Component, buttonText }) => {
   return (
+    <div className="show">
     <Card.Group
       centered={true}
       doubling={true}
@@ -29,6 +30,7 @@ const ShowContainer = ({ items, clickEvents, Component, buttonText }) => {
         </div>
       ))}
     </Card.Group>
+    </div>
   );
 };
 

@@ -110,86 +110,85 @@ const Home = ({ accessToken }) => {
   const contextRef = createRef();
 
   return (
-    <Ref innerRef={contextRef}>
-      <Grid stackable column={3}>
-        <Grid.Row>
-          <Grid.Column>
-            <Sticky context={contextRef}>
-              <Player uri={playingURI} />
-            </Sticky>
-          </Grid.Column>
-        </Grid.Row>
+    <div className="home">
+      <Ref innerRef={contextRef}>
+        <Grid stackable column={3}>
+          <Grid.Row>
+            <Grid.Column>
+              <Sticky context={contextRef}>
+                <Player uri={playingURI} />
+              </Sticky>
+            </Grid.Column>
+          </Grid.Row>
 
-        <Grid.Row>
-          <Grid.Column floated="left" width={3}>
-            <div className="card">
-              <Card
-                
-              >
-                <Card.Content>
-                  <Card.Header>Lyrics</Card.Header>
-                  <Card.Meta>
-                  {!loadingLyrics ? lyrics : <Loader active inline />}
-                  </Card.Meta>
-                </Card.Content>
-              </Card>
-            </div>
-          </Grid.Column>
-          <Grid.Column verticalAlign="middle" width={10}>
-            <SearchBar
-              key="searchBar"
-              handleSubmit={makeQuery}
-              radioField={radioField}
-              setRadioField={setRadioField}
-              setTopTracksTimeFrame={setTopTracksTimeFrame}
-              topTracksTimeFrame={topTracksTimeFrame}
-            />
-            <br></br>
+          <Grid.Row>
+            <Grid.Column floated="left" width={3}>
+              <div className="card">
+                <Card
+                  extra={!loadingLyrics ? lyrics : <Loader active inline />}
+                />
+              </div>
+            </Grid.Column>
+            <Grid.Column verticalAlign="middle" width={10}>
+              <Grid.Row>
+                <SearchBar
+                  key="searchBar"
+                  handleSubmit={makeQuery}
+                  radioField={radioField}
+                  setRadioField={setRadioField}
+                  setTopTracksTimeFrame={setTopTracksTimeFrame}
+                  topTracksTimeFrame={topTracksTimeFrame}
+                />
+              </Grid.Row>
+              <br></br>
 
-            <Grid.Row>
-              {!loadingContent ? (
-                radioField === "Playlists" ? (
-                  <ShowContainer
-                    items={playlists}
-                    Component={PlaylistCard}
-                    clickEvents={{
-                      handleClick: setPlayer,
-                      actionSong: getPlaylist
-                    }}
-                    buttonText="View Playlist"
-                  />
+              <Grid.Row>
+                {!loadingContent ? (
+                  radioField === "Playlists" ? (
+                    <ShowContainer
+                      items={playlists}
+                      Component={PlaylistCard}
+                      clickEvents={{
+                        handleClick: setPlayer,
+                        actionSong: getPlaylist
+                      }}
+                      buttonText="View Playlist"
+                    />
+                  ) : (
+                    <ShowContainer
+                      items={songs}
+                      clickEvents={{
+                        handleClick: setPlayer,
+                        actionSong: addSongToPlaylist
+                      }}
+                      Component={SongCard}
+                      buttonText="Add"
+                    />
+                  )
                 ) : (
-                  <ShowContainer
-                    items={songs}
-                    clickEvents={{
-                      handleClick: setPlayer,
-                      actionSong: addSongToPlaylist
-                    }}
-                    Component={SongCard}
-                    buttonText="Add"
-                  />
-                )
-              ) : (
-                <Loader active inline />
-              )}
-            </Grid.Row>
-          </Grid.Column>
-          <Grid.Column floated="right" width={3}>
-            <CurrentPlaylistContainer
-              songsToAdd={songsToAdd}
-              setPlayer={setPlayer}
-              removeSongFromPlaylist={removeSongFromPlaylist}
-              newPlaylist={newPlaylist}
-              currentPlaylist={currentPlaylist}
-              setCurrentPlaylist={setCurrentPlaylist}
-              playlists={playlists}
-              setSongsToAdd={setSongsToAdd}
-              addToPlaylist={addToPlaylist}
-            />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Ref>
+                  <div className="show">
+                    <Loader active inline />
+                  </div>
+                )}
+              </Grid.Row>
+            </Grid.Column>
+            <Grid.Column floated="right" width={3}>
+              <CurrentPlaylistContainer
+                songsToAdd={songsToAdd}
+                setPlayer={setPlayer}
+                removeSongFromPlaylist={removeSongFromPlaylist}
+                newPlaylist={newPlaylist}
+                currentPlaylist={currentPlaylist}
+                setCurrentPlaylist={setCurrentPlaylist}
+                playlists={playlists}
+                setSongsToAdd={setSongsToAdd}
+                addToPlaylist={addToPlaylist}
+              />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Ref>
+    </div>
   );
 };
 
