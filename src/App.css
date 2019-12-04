@@ -68,8 +68,8 @@ body {
 }
 
 .logo {
-  background-image: url(http://mhdnyc.splashthat.com/img/events/52537/assets/6274.spotify-logo-horizontal-white-rgb.png);
-  background-size: 200px;
+  background-size: 300px;
+  opacity: 0.3;
   background-repeat: no-repeat;
   margin-left: -100px;
   margin-top: 40px;

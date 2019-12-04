@@ -8,6 +8,7 @@ import SearchBar from "../components/SearchBar";
 import SongCard from "../components/SongCard";
 import PlaylistCard from "../components/PlaylistCard";
 
+
 const Home = ({ accessToken }) => {
   const [songs, setSongs] = useState([]);
   const [loadingContent, setLoadingContent] = useState(false);
@@ -123,8 +124,15 @@ const Home = ({ accessToken }) => {
           <Grid.Column floated="left" width={3}>
             <div className="card">
               <Card
-                extra={!loadingLyrics ? lyrics : <Loader active inline />}
-              />
+                
+              >
+                <Card.Content>
+                  <Card.Header>Lyrics</Card.Header>
+                  <Card.Meta>
+                  {!loadingLyrics ? lyrics : <Loader active inline />}
+                  </Card.Meta>
+                </Card.Content>
+              </Card>
             </div>
           </Grid.Column>
           <Grid.Column verticalAlign="middle" width={10}>
