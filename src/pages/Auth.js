@@ -3,11 +3,20 @@ import { Button } from "semantic-ui-react";
 
 const Auth = () => {
   return (
-    <Button
-      onClick={() => (window.location = "http://localhost:3001/spotify/login")}
-    >
-      SPOTIFY
-    </Button>
+    <div id="auth">
+      <div id="header">
+        <div class="logo"></div>
+      </div>
+      <div id="main">
+        <Button
+          onClick={() =>
+            (window.location = "http://localhost:3001/spotify/login")
+          }
+        >
+          Login With Spotify
+        </Button>
+      </div>
+    </div>
   );
 };
 
