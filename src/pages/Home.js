@@ -48,7 +48,7 @@ const Home = ({ accessToken }) => {
     setLoadingContent(true);
     setRadioField("search");
     API.fetchSongQuery(query, accessToken).then(songs => {
-      songs.items ? setSongs(songs) : alert("No songs found!");
+      songs.length ? setSongs(songs) : alert("No songs found!");
       setLoadingContent(false);
     });
   };

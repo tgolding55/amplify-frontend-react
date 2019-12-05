@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Radio, Dropdown } from "semantic-ui-react";
+import { Radio, Dropdown, Menu } from "semantic-ui-react";
 const SearchBar = ({
   handleSubmit,
   radioField,
@@ -18,35 +18,39 @@ const SearchBar = ({
       }}
     >
       <div className="ui search">
-        <div className="ui icon input">
-          <input
-            className="prompt"
-            type="text"
-            name="name"
-            value={inputField}
-            onChange={e => setInputField(e.target.value)}
-            placeholder="Search Spotify"
-          />
-          <i className="search icon" />
-        </div>
-        <Radio
-          label="Playlists"
-          name="radioGroup"
-          value="Playlists"
-          checked={radioField === "Playlists"}
-          onChange={e => {
-            setRadioField(e.target.innerText);
-          }}
-        ></Radio>
-        <Radio
-          label="Top Tracks"
-          name="radioGroup"
-          value="TopTracks"
-          checked={radioField === "TopTracks"}
-          onChange={(e, { value }) => {
-            setRadioField(value);
-          }}
-        ></Radio>
+        <Menu>
+          <Menu.Item
+            name="TopTracks"
+            active={radioField === "TopTracks"}
+            onClick={e => {
+              setRadioField(e.target.innerText);
+            }}
+          >
+            TopTracks
+          </Menu.Item>
+          <Menu.Item
+            name="Playlists"
+            active={radioField === "Playlists"}
+            onClick={e => {
+              setRadioField(e.target.innerText);
+            }}
+          >
+            Playlists
+          </Menu.Item>
+          <div style={{ width: "100%" }}></div>
+          <div className="ui icon input">
+            <input
+              className="prompt"
+              type="text"
+              name="name"
+              value={inputField}
+              onChange={e => setInputField(e.target.value)}
+              placeholder="Search Spotify"
+            />
+            <i className="search icon" />
+          </div>
+        </Menu>
+
         {radioField === "TopTracks" && (
           <Dropdown
             fluid
