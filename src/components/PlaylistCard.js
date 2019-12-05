@@ -8,16 +8,18 @@ const PlaylistCard = ({
   trackNum,
   description,
   clickEvents: { handleClick },
-  actionButton
+  actionButton,
+  fluidbool = false
 }) => {
   return (
     <div className="card">
-      <Card onClick>
+      <Card onClick fluid={fluidbool}>
         <Image
+          size="small"
           src={
             image
               ? image.url
-              : "https://cdn.ebaumsworld.com/mediaFiles/picture/718392/84717656.jpg"
+              : "https://i.kinja-img.com/gawker-media/image/upload/c_fill,f_auto,fl_progressive,g_center,h_675,pg_1,q_80,w_1200/zrarqnhmkoaihvzss5ek.jpg"
           }
           className="cardImage"
           wrapped

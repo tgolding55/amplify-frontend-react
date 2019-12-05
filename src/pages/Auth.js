@@ -5,7 +5,7 @@ const Auth = () => {
   return (
     <div id="auth">
       <div id="header">
-        <div class="logo"></div>
+        <div class="logo"></div> 
       </div>
       <div id="main">
         <Button

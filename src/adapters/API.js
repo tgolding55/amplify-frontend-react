@@ -4,6 +4,7 @@ const SONG_QUERY = SPOTIFY_ENDPOINT + "search";
 const PLAYLIST_ENDPOINT = SPOTIFY_ENDPOINT + "playlists";
 const TOPTRACKS_ENDPOINT = SPOTIFY_ENDPOINT + "toptracks";
 const LYRICS_ENDPOINT = SPOTIFY_ENDPOINT + "lyrics";
+const FEATUREDPLAYLIST_ENDPOINT = PLAYLIST_ENDPOINT + "/featured";
 const jsonify = resp => resp.json();
 
 //lyrics api
@@ -53,6 +54,9 @@ const getTrackFromPlaylist = (accessToken, playlistId) =>
     jsonify
   );
 
+const getFeaturedPlaylists = accessToken =>
+  fetch(FEATUREDPLAYLIST_ENDPOINT + "/?auth=" + accessToken).then(jsonify);
+
 export default {
   fetchSongQuery,
   getPlaylists,
@@ -60,5 +64,6 @@ export default {
   postPlaylist,
   fetchLyrics,
   addToPlaylist,
-  getTrackFromPlaylist
+  getTrackFromPlaylist,
+  getFeaturedPlaylists
 };

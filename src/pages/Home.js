@@ -3,7 +3,7 @@ import API from "../adapters/API";
 import ShowContainer from "../containers/ShowContainer";
 import CurrentPlaylistContainer from "../containers/CurrentPlaylistContainer";
 import Player from "../components/Player";
-import { Grid, Card, Sticky, Ref, Loader } from "semantic-ui-react";
+import { Grid, Card, Sticky, Ref, Loader, Button } from "semantic-ui-react";
 import SearchBar from "../components/SearchBar";
 import SongCard from "../components/SongCard";
 import PlaylistCard from "../components/PlaylistCard";
@@ -21,11 +21,19 @@ const Home = ({ accessToken }) => {
   const [lyrics, setLyrics] = useState("");
   const [songsToAdd, setSongsToAdd] = useState([]);
   const [currentPlaylist, setCurrentPlaylist] = useState({});
+  const [featuredPlaylists, setFeaturedPlaylists] = useState([]);
 
   const initialSetup = () => {
     setLoadingContent(true);
     topSongs();
     getPlaylists();
+    getFeaturedPlaylists();
+  };
+
+  const getFeaturedPlaylists = () => {
+    API.getFeaturedPlaylists(accessToken).then(playlists =>
+      setFeaturedPlaylists(playlists)
+    );
   };
 
   const getPlaylists = () => {
@@ -126,13 +134,52 @@ const Home = ({ accessToken }) => {
             <Grid.Column floated="left" width={3}>
               <div className="card">
                 <Card>
-                  <Card.Header>Lyrics</Card.Header>
+                  {radioField !== "Playlists" ? (
+                    <>
+                      <Card.Header>Lyrics</Card.Header>
 
-                  <Card.Content>
-                    <Card.Meta>
-                      {!loadingLyrics ? lyrics : <Loader active inline />}
-                    </Card.Meta>
-                  </Card.Content>
+                      <Card.Content>
+                        <Card.Meta>
+                          {!loadingLyrics ? lyrics : <Loader active inline />}
+                        </Card.Meta>
+                      </Card.Content>
+                    </>
+                  ) : (
+                    <>
+                      <Card.Header>Featured Playlists</Card.Header>
+
+                      <Card.Content>
+                        <Card.Group
+                          centered={true}
+                          doubling={true}
+                          textAlign="center"
+                          stackable={true}
+                        >
+                          {featuredPlaylists.map((item, index) => (
+                            <div key={index + "div"}>
+                              <PlaylistCard
+                                fluidbool={true}
+                                key={index + item.id + "featured"}
+                                {...item}
+                                clickEvents={{
+                                  handleClick: setPlayer
+                                }}
+                                actionButton={
+                                  <Button
+                                    positive
+                                    key={item.id + Math.random()}
+                                    onClick={() => getPlaylist(item.id)}
+                                  >
+                                    View Playlist
+                                  </Button>
+                                }
+                              />
+                            </div>
+                          ))}
+                        </Card.Group>
+                      </Card.Content>
+                    </>
+                  )}
                 </Card>
               </div>
             </Grid.Column>
