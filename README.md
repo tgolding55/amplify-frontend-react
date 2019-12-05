@@ -73,5 +73,5 @@ They will need to enter the command in their terminal npm install and then npm s
 
 
 Credits
-Milen Khana contributor partner. 
+Milen Khanal contributor partner. 
 
