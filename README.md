@@ -41,10 +41,12 @@ User can check top 10 tracks
 User can check most recently listened songs. 
 
 
+## Full Video 
+https://www.youtube.com/watch?v=rvOt45w9bFs&feature=youtu.be
 
 ## Use case 
 
-https://j.gifs.com/r8ql5W.gif
+![alt](https://j.gifs.com/r8ql5W.gif)
 
 ## API Reference
 
