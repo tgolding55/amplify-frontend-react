@@ -44,7 +44,7 @@ User can check most recently listened songs.
 
 ## Use case 
 
-https://youtu.be/rvOt45w9bFs
+https://j.gifs.com/r8ql5W.gif
 
 ## API Reference
 
