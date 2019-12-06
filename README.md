@@ -42,12 +42,9 @@ User can check most recently listened songs.
 
 
 
-## Code Example
+## Use case 
 
-Show what the library does as concisely as possible, developers should be able to figure out how your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
-
-## Installation
-Provide step by step series of examples and explanations about how to get a development env running.
+https://youtu.be/rvOt45w9bFs
 
 ## API Reference
 
