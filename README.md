@@ -1,68 +1,76 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project title
+Amplify uses spotify Api and lets users build custom playlist and search songs, find lyrics for the songs and add songs to the playlist. It also shows you your most listened songs of all time. 
 
-## Available Scripts
+## Motivation
+The motivation behind this project is to demonstrate our understanding and learning in React. We saw an opportunity to customise and use Spotify Api. So we built this project based on the data that was available on Spotify Api and cater it to User needs. 
 
-In the project directory, you can run:
+Build status
 
-### `yarn start`
+Code style
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+js-standard-style
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Screenshots
 
-### `yarn test`
+Include logo/demo screenshot etc.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech/framework used
+Ex. - React.js
 
-### `yarn build`
+Built with
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Node.js
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Features
+What makes your project stand out?
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+User is able to create playlist and add songs to playlist. When the user will click on on the song the lyrics will be presented for the song. This gives a better user experience if they like to singalong. 
 
-### `yarn eject`
+Things you can do
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+User can search any song. Play the song and the lyrics will show up. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+User can add a song to their existing playlist. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+User can create a new playlist. 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+User can check their playlist 
 
-## Learn More
+User can check top 10 tracks
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+User can check most recently listened songs. 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Full Video 
+https://www.youtube.com/watch?v=rvOt45w9bFs&feature=youtu.be
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Use case 
 
-### Analyzing the Bundle Size
+![alt](https://j.gifs.com/r8ql5W.gif)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## API Reference
 
-### Making a Progressive Web App
+https://developer.spotify.com/documentation/web-api/
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Tests
+Describe and show how to run the tests with code examples.
 
-### Advanced Configuration
+## How to use?
+User should clone the repo or fork the amplify-frontend and amplify-backend to their local enviorment separately. The backend will need to be running on //http.localhost:3001. Enter command node server in your terminal to start the server. 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Front-end - 
+They will need to enter the command in their terminal npm install and then npm start.  
 
-### Deployment
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-### `yarn build` fails to minify
+## Contribute - 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+User should clone the repo or fork the amplify-frontend and amplify-backend to their local enviorment separately. The backend will need to be running on //http.localhost:3001. Enter command node server in your terminal to start the server. 
+
+Front-end - 
+They will need to enter the command in their terminal npm install and then npm start.  
+
+
+Credits
+Milen Khanal contributor partner. 
+
