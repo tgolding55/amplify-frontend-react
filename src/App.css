@@ -29,6 +29,14 @@ body {
   scroll-padding: 10px 10px 10px 10px;
 }
 
+.featuredPlaylist {
+  overflow-y: auto;
+  max-height: 75vh;
+  height: 100%;
+  width: auto;
+  scroll-padding: 10px 10px 10px 10px;
+}
+
 .playlistShow {
   overflow-y: auto;
   max-height: 45vh;

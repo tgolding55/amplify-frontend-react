@@ -132,7 +132,7 @@ const Home = ({ accessToken }) => {
 
           <Grid.Row>
             <Grid.Column floated="left" width={3}>
-              <div className="card">
+              <div className="featuredPlaylist">
                 <Card>
                   {radioField !== "Playlists" ? (
                     <>
