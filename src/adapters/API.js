@@ -1,4 +1,4 @@
-const API_ENDPOINT = "http://localhost:3001/";
+const API_ENDPOINT = "https://amplify-backend.herokuapp.com/";
 const SPOTIFY_ENDPOINT = API_ENDPOINT + "spotify/";
 const SONG_QUERY = SPOTIFY_ENDPOINT + "search";
 const PLAYLIST_ENDPOINT = SPOTIFY_ENDPOINT + "playlists";
